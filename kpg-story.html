@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kruparth's Journey: 2023 to Present</title>
+
+  <!-- Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FAF7F2;
+      --surface: #FFFFFF;
+      --ink: #171A1D;
+      --muted: #646B73;
+      --border: #E7E0D6;
+      --accent: #C85A32;
+      --accent-soft: rgba(200, 90, 50, 0.14);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      background-image: radial-gradient(rgba(67, 83, 79, 0.045) 0.7px, transparent 0.7px);
+      background-size: 18px 18px;
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* --- TOP BAR --- */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 28px;
+      color: #fff;
+      background: rgba(17, 31, 39, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .brand {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .insta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .insta-pill:hover { transform: translateY(-1px); border-color: var(--accent); }
+    .insta-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #e9a47f;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 132px max(28px, calc((100vw - 1280px) / 2)) 56px;
+      color: #fff;
+      background-color: #102029;
+      background:
+        linear-gradient(90deg, rgba(16, 29, 37, 0.98) 0%, rgba(16, 29, 37, 0.9) 42%, rgba(16, 29, 37, 0.24) 100%),
+        url("assets/kruparth-journey-cover.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%, auto 100%;
+      background-position: center, right center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    }
+    .hero > :not(.hero-collage) {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-collage {
+      position: absolute;
+      z-index: 0;
+      top: 76px;
+      right: max(36px, calc((100vw - 1280px) / 2));
+      width: min(34vw, 430px);
+      height: 410px;
+      pointer-events: none;
+    }
+    .hero-collage img {
+      position: absolute;
+      display: block;
+      width: 36%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border: 6px solid rgba(255, 255, 255, 0.94);
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.42);
+      transform: rotate(var(--angle));
+      opacity: 0;
+      animation:
+        collage-reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) var(--delay) forwards,
+        collage-drift var(--duration) ease-in-out calc(var(--delay) + 0.8s) infinite;
+    }
+    .hero-collage img:nth-child(1) {
+      top: 3%; left: 16%; width: 35%;
+      --angle: -9deg; --delay: 0.05s; --duration: 5.4s; z-index: 2;
+    }
+    .hero-collage img:nth-child(2) {
+      top: 0; right: 4%; width: 39%;
+      --angle: 7deg; --delay: 0.18s; --duration: 6.1s; z-index: 5;
+    }
+    .hero-collage img:nth-child(3) {
+      top: 34%; left: 0; width: 33%;
+      --angle: 5deg; --delay: 0.31s; --duration: 5.7s; z-index: 4;
+    }
+    .hero-collage img:nth-child(4) {
+      top: 29%; right: 0; width: 36%;
+      --angle: -7deg; --delay: 0.44s; --duration: 6.4s; z-index: 3;
+    }
+    .hero-collage img:nth-child(5) {
+      bottom: 0; left: 19%; width: 34%;
+      --angle: -4deg; --delay: 0.57s; --duration: 5.9s; z-index: 6;
+    }
+    .hero-collage img:nth-child(6) {
+      bottom: 5%; right: 15%; width: 34%;
+      --angle: 8deg; --delay: 0.7s; --duration: 6.2s; z-index: 5;
+    }
+    @keyframes collage-reveal {
+      from { opacity: 0; scale: 0.88; }
+      to { opacity: 1; scale: 1; }
+    }
+    @keyframes collage-drift {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -8px; }
+    }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #e8a27e;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 600;
+      line-height: 1.02;
+      max-width: 900px;
+      margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: italic; font-weight: 500; color: #f0ad88; }
+    .hero-sub {
+      font-size: 1.08rem;
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 640px;
+      margin-bottom: 34px;
+    }
+
+    /* Stats + Insta Story Highlights Row */
+    .hero-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 28px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .stats {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .stat-val {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .stat-lbl {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.66);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    /* Insta Story Bubbles */
+    .stories-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 4px 2px;
+    }
+    .story-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--sans);
+    }
+    .story-ring {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #f59e0b, #e11d48, #8b5cf6);
+      transition: transform 0.22s ease;
+    }
+    .story-btn:hover .story-ring { transform: scale(1.07); }
+    .story-thumb {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      border: 3px solid var(--bg);
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    .story-label {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    /* --- SCROLLYTELLING LAYOUT --- */
+    .atlas-container {
+      display: grid;
+      grid-template-columns: 46% 54%;
+      max-width: 1440px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Sticky Map Column */
+    .map-column {
+      position: sticky;
+      top: 61px;
+      height: calc(100vh - 61px);
+      padding: 24px;
+    }
+    .map-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(23, 26, 29, 0.08);
+    }
+    .journey-map {
+      --map-ink: #20362f;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      color: var(--map-ink);
+      background:
+        radial-gradient(ellipse at 75% 16%, rgba(255, 255, 255, 0.7), transparent 38%),
+        linear-gradient(155deg, #e8e8d9, #dce5da 55%, #e8e2d4);
+    }
+    .journey-map-header,
+    .journey-map-footer {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 20px;
+    }
+    .journey-map-header { align-items: flex-start; }
+    .map-overline,
+    .map-era,
+    .map-current-label {
+      font: 500 0.65rem var(--mono);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .map-overline { color: #63796d; }
+    .map-map-title {
+      display: block;
+      margin-top: 3px;
+      font: 700 1.45rem/1.1 var(--serif);
+    }
+    .map-era {
+      padding: 6px 9px;
+      border: 1px solid rgba(32, 54, 47, 0.2);
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .route-map-canvas { position: relative; flex: 1; min-height: 0; }
+    .route-map-art { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .map-terrain {
+      fill: none;
+      stroke: rgba(63, 88, 75, 0.12);
+      stroke-width: 1;
+    }
+    .route-base {
+      fill: none;
+      stroke: rgba(47, 69, 58, 0.22);
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .route-segment {
+      fill: none;
+      stroke: #bdc8b9;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), stroke 0.5s ease;
+    }
+    .journey-map[data-active="frankfurt"] .route-segment.flight,
+    .journey-map[data-active="chemnitz"] .route-segment.flight,
+    .journey-map[data-active="prague"] .route-segment.flight { stroke: var(--accent); }
+    .journey-map[data-active="chemnitz"] .train-leg-one,
+    .journey-map[data-active="prague"] .train-leg-one,
+    .journey-map[data-active="prague"] .train-leg-two { stroke: #527b65; }
+    .journey-map[data-active="frankfurt"] .route-segment.flight,
+    .journey-map[data-active="chemnitz"] .route-segment.flight,
+    .journey-map[data-active="chemnitz"] .train-leg-one,
+    .journey-map[data-active="prague"] .route-segment { stroke-dashoffset: 0; }
+    .journey-map[data-active="chemnitz"] .train-leg-two { stroke-dashoffset: 1; }
+    .map-checkpoint {
+      --checkpoint-color: #9aa99b;
+      position: absolute;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 30px max-content;
+      align-items: center;
+      gap: 7px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--map-ink);
+      text-align: left;
+      cursor: pointer;
+    }
+    .map-checkpoint:hover .checkpoint-dot,
+    .map-checkpoint:focus-visible .checkpoint-dot { transform: scale(1.12); }
+    .map-checkpoint:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+    .checkpoint-dot {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border: 2px solid #eef0e5;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--checkpoint-color);
+      box-shadow: 0 0 0 1px rgba(32, 54, 47, 0.28);
+      font: 500 0.62rem var(--mono);
+      transition: background 0.35s ease, transform 0.2s ease;
+    }
+    .checkpoint-copy { display: block; white-space: nowrap; }
+    .checkpoint-copy strong { display: block; font-size: 0.72rem; line-height: 1.2; }
+    .checkpoint-copy small { display: block; color: #66776c; font: 0.59rem var(--mono); }
+    .map-checkpoint.visited,
+    .map-checkpoint.active { --checkpoint-color: var(--accent); }
+    .map-checkpoint.active .checkpoint-dot {
+      box-shadow: 0 0 0 4px rgba(200, 90, 50, 0.18);
+      animation: checkpoint-pulse 2.4s ease-out infinite;
+    }
+    .checkpoint-bengaluru { left: 4%; top: 79%; }
+    .checkpoint-frankfurt { left: 37%; top: 11%; }
+    .checkpoint-chemnitz { left: 61%; top: 27%; }
+    .checkpoint-prague { left: 70%; top: 46%; }
+    .map-traveler {
+      position: absolute;
+      z-index: 3;
+      left: 44%;
+      top: 14%;
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(200, 90, 50, 0.3);
+      border-radius: 50%;
+      background: rgba(255, 253, 247, 0.7);
+      box-shadow: 0 0 18px rgba(200, 90, 50, 0.3);
+      transform: translate(-50%, -50%);
+      transition: left 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), top 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .map-traveler::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .map-traveler::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border: 1px solid rgba(200, 90, 50, 0.58);
+      border-radius: 50%;
+      animation: traveler-ripple 2.2s ease-out infinite;
+    }
+    .journey-map[data-active="chemnitz"] .map-traveler { left: 55%; top: 31%; }
+    .journey-map[data-active="prague"] .map-traveler { left: 65%; top: 50%; }
+    .journey-map[data-active="chemnitz"] .map-traveler,
+    .journey-map[data-active="prague"] .map-traveler { color: #355a49; }
+    .journey-map[data-active="chemnitz"] .map-traveler::before,
+    .journey-map[data-active="prague"] .map-traveler::before { background: #527b65; }
+    .journey-map[data-active="chemnitz"] .map-traveler::after,
+    .journey-map[data-active="prague"] .map-traveler::after { border-color: rgba(82, 123, 101, 0.56); }
+    .map-land { fill: rgba(161, 185, 143, 0.18); stroke: rgba(106, 140, 112, 0.2); stroke-width: 1; }
+    .map-river { fill: none; stroke: rgba(111, 170, 172, 0.6); stroke-width: 5; stroke-linecap: round; }
+    .map-mountain { fill: #a7be9a; stroke: #849e81; stroke-width: 1.5; stroke-linejoin: round; }
+    .map-mountain-snow { fill: #f6f1dc; opacity: 0.85; }
+    .map-sun { fill: #f0c77d; opacity: 0.7; }
+    .map-cloud { fill: rgba(255, 255, 255, 0.7); animation: cloud-drift 12s ease-in-out infinite alternate; }
+    .map-cloud.second { animation-delay: -5s; animation-duration: 16s; }
+    .map-spark { fill: #d29655; transform-box: fill-box; transform-origin: center; animation: spark-twinkle 2.8s ease-in-out infinite; }
+    .map-spark.second { animation-delay: -1.3s; }
+    @keyframes traveler-ripple {
+      0% { transform: scale(0.72); opacity: 0.8; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+    @keyframes checkpoint-pulse {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(200, 90, 50, 0.16); }
+      50% { box-shadow: 0 0 0 7px rgba(200, 90, 50, 0.08); }
+    }
+    @keyframes cloud-drift {
+      from { transform: translateX(-6px); }
+      to { transform: translateX(7px); }
+    }
+    @keyframes spark-twinkle {
+      0%, 100% { opacity: 0.25; transform: scale(0.7); }
+      50% { opacity: 1; transform: scale(1.25); }
+    }
+    .journey-map-footer {
+      display: block;
+      margin: 0 14px 14px;
+      padding: 12px 14px;
+      border: 1px solid rgba(32, 54, 47, 0.12);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px);
+    }
+    .map-current-label { color: #687b6d; }
+    .map-current-place {
+      display: block;
+      margin-top: 2px;
+      font: 700 1.2rem/1.2 var(--serif);
+    }
+    .map-current-detail { color: #617267; font-size: 0.72rem; }
+
+    .map-frame {
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(23, 26, 29, 0.06);
+    }
+    .journey-map {
+      --map-ink: var(--ink);
+      --route-progress: 0%;
+      background: #fff;
+    }
+    .journey-map-header {
+      align-items: flex-start;
+      padding: 22px 22px 18px;
+      border-bottom: 1px solid #eeece7;
+    }
+    .map-overline,
+    .map-era,
+    .map-current-label {
+      color: #7a7a73;
+      font: 600 0.61rem var(--mono);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .map-map-title {
+      margin-top: 5px;
+      font: 600 1.35rem/1.15 var(--serif);
+    }
+    .map-era {
+      padding: 7px 9px;
+      border: 1px solid #e8e4dc;
+      border-radius: 7px;
+      color: #686a64;
+      letter-spacing: 0.04em;
+    }
+    .checkpoint-list {
+      position: relative;
+      display: grid;
+      flex: 1;
+      grid-template-rows: repeat(var(--checkpoint-count, 5), minmax(0, 1fr));
+      min-height: 0;
+      padding: 20px 16px;
+    }
+    .checkpoint-list::before,
+    .checkpoint-progress {
+      position: absolute;
+      left: 40px;
+      top: 10%;
+      width: 2px;
+      border-radius: 2px;
+      content: "";
+    }
+    .checkpoint-list::before {
+      bottom: 10%;
+      background: #e9e6df;
+    }
+    .checkpoint-progress {
+      height: var(--route-progress);
+      background: var(--accent);
+      transition: height 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .map-checkpoint {
+      --checkpoint-color: #9a9b94;
+      position: relative;
+      left: auto;
+      top: auto;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      min-width: 0;
+      padding: 7px 10px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+    }
+    .map-checkpoint:hover,
+    .map-checkpoint:focus-visible,
+    .map-checkpoint.active {
+      border-color: #eee8df;
+      background: #faf8f4;
+    }
+    .map-checkpoint:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .checkpoint-dot {
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      color: #676a63;
+      background: #eeece6;
+      box-shadow: 0 0 0 1px #e4e0d8;
+      font: 600 0.58rem var(--mono);
+      transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+    }
+    .map-checkpoint.visited .checkpoint-dot {
+      color: #fff;
+      background: #617d6d;
+      box-shadow: 0 0 0 1px #617d6d;
+    }
+    .map-checkpoint.active .checkpoint-dot {
+      color: #fff;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(200, 90, 50, 0.14);
+      animation: none;
+    }
+    .checkpoint-copy { min-width: 0; white-space: normal; }
+    .checkpoint-copy strong {
+      display: block;
+      font-size: 0.78rem;
+      line-height: 1.25;
+    }
+    .checkpoint-flag {
+      display: inline-block;
+      margin-right: 5px;
+      transform-origin: center 75%;
+      transition: transform 0.2s ease;
+    }
+    .map-checkpoint:hover .checkpoint-flag,
+    .map-checkpoint:focus-visible .checkpoint-flag {
+      transform: translateY(-1px) scale(1.12);
+    }
+    .map-checkpoint.active .checkpoint-flag {
+      animation: checkpoint-flag-wave 1.8s ease-in-out infinite;
+    }
+    @keyframes checkpoint-flag-wave {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-2px) rotate(5deg); }
+    }
+    .checkpoint-copy small {
+      display: block;
+      margin-top: 3px;
+      color: #7b7b74;
+      font: 0.58rem var(--mono);
+      letter-spacing: 0.025em;
+    }
+    .checkpoint-status {
+      color: #85857e;
+      font: 600 0.54rem var(--mono);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .map-checkpoint.active .checkpoint-status { color: var(--accent); }
+    .journey-map-footer {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 5px 12px;
+      margin: 0;
+      padding: 16px 22px 19px;
+      border-top: 1px solid #eeece7;
+      background: #fff;
+      backdrop-filter: none;
+    }
+    .map-current-label { grid-column: 1; }
+    .map-current-place {
+      grid-column: 1;
+      margin-top: 0;
+      font: 600 1.08rem/1.2 var(--serif);
+    }
+    .map-current-detail {
+      grid-column: 1;
+      color: #777870;
+      font-size: 0.68rem;
+    }
+
+    /* Chapters Column */
+    .chapters-column {
+      padding: 36px 40px 120px 20px;
+    }
+    .chapter {
+      padding: 40px 0 64px;
+      border-bottom: 1px solid var(--border);
+      opacity: 0.45;
+      transition: opacity 0.45s ease;
+    }
+    .chapter.active { opacity: 1; }
+    .chapter:last-child { border-bottom: none; }
+
+    .chapter-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .chapter-num {
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      font-weight: 500;
+    }
+    .chapter h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.2vw, 2.8rem);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .chapter-story {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 26px;
+    }
+
+    .route-card {
+      padding: 20px;
+      margin: 0 0 28px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+    .route-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .route-kicker {
+      color: var(--accent);
+      font: 500 0.7rem var(--mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .route-card h3 {
+      margin-top: 3px;
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      line-height: 1.15;
+    }
+    .route-play {
+      flex: 0 0 auto;
+      border: 0;
+      border-radius: 999px;
+      padding: 9px 14px;
+      background: var(--accent);
+      color: #fff;
+      font: 600 0.78rem var(--sans);
+      cursor: pointer;
+    }
+    .route-play:hover { background: #a94425; }
+    .route-play:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 3px; }
+    .route-track {
+      height: 48px;
+      position: relative;
+      margin: 16px 3px 4px;
+    }
+    .route-leg {
+      position: absolute;
+      top: 21px;
+      height: 0;
+    }
+    .flight-leg {
+      left: 4%;
+      width: 46%;
+      border-top: 2px dashed var(--accent);
+    }
+    .train-leg {
+      left: 50%;
+      width: 46%;
+      border-top: 2px solid #536a7b;
+    }
+    .route-stop {
+      position: absolute;
+      top: 15px;
+      width: 13px;
+      height: 13px;
+      border: 2px solid var(--surface);
+      border-radius: 50%;
+      background: var(--ink);
+      box-shadow: 0 0 0 1px var(--ink);
+      transform: translateX(-50%);
+    }
+    .route-stop.start { left: 4%; }
+    .route-stop.transfer { left: 50%; }
+    .route-stop.end { left: 96%; }
+    .route-vehicle {
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      display: block;
+      width: 32px;
+      text-align: center;
+      font-size: 1.25rem;
+      opacity: 0;
+      transform: translateX(-50%);
+    }
+    .route-air { left: 4%; }
+    .route-rail { left: 50%; }
+    .route-air::before,
+    .route-rail::before {
+      display: inline-block;
+      padding: 3px 6px;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(23, 26, 29, 0.12);
+      color: var(--accent);
+      font: 600 0.56rem var(--mono);
+      letter-spacing: 0.06em;
+    }
+    .route-air::before { content: "AIR"; }
+    .route-rail::before { content: "RAIL"; color: #527b65; }
+    .route-card.playing .route-air {
+      opacity: 1;
+      animation: fly-to-frankfurt 1.8s ease-in-out forwards;
+    }
+    .route-card.playing .route-rail {
+      animation: train-to-chemnitz 1.5s ease-in-out 1.8s forwards;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .route-card.playing .route-air,
+      .route-card.playing .route-rail { animation: none; opacity: 1; }
+      .route-card.playing .route-air { left: 50%; }
+      .route-card.playing .route-rail { left: 96%; }
+      .map-traveler { transition: none; }
+      .map-traveler::after,
+      .map-spark,
+      .map-cloud,
+      .map-checkpoint.active .checkpoint-dot,
+      .map-checkpoint.active .checkpoint-flag { animation: none; }
+      .route-segment { transition: none; }
+      .hero-collage img {
+        opacity: 1;
+        animation: none;
+        scale: 1;
+        translate: 0 0;
+      }
+    }
+    @keyframes fly-to-frankfurt {
+      from { left: 4%; }
+      to { left: 50%; }
+    }
+    @keyframes train-to-chemnitz {
+      0% { left: 50%; opacity: 0; }
+      8% { opacity: 1; }
+      100% { left: 96%; opacity: 1; }
+    }
+    .route-stops {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+    .route-stop-label { min-width: 0; }
+    .route-stop-label:nth-child(2) { text-align: center; }
+    .route-stop-label:nth-child(3) { text-align: right; }
+    .route-stop-label strong,
+    .route-stop-label span { display: block; }
+    .route-stop-label strong { font-size: 0.82rem; }
+    .route-stop-label span { color: var(--muted); font-size: 0.68rem; }
+    .route-status {
+      min-height: 1.4em;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    /* Editorial Photo Album Grid */
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .photo-card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .photo-card.wide { grid-column: span 2; aspect-ratio: 16 / 9; }
+    .photo-card:not(.wide) { aspect-ratio: 4 / 5; }
+    .photo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 34px rgba(23, 26, 29, 0.12);
+    }
+    .photo-media { width: 100%; height: 100%; }
+    .photo-media svg, .photo-media img, .photo-media video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .photo-card.is-video::before {
+      content: "▶";
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      padding-left: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(16, 18, 22, 0.48);
+      font-size: 0.9rem;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .photo-caption-bar {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 28px 16px 14px;
+      background: linear-gradient(to top, rgba(16, 18, 22, 0.82), transparent);
+      color: #fff;
+      font-size: 0.84rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .photo-tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      opacity: 0.85;
+      white-space: nowrap;
+    }
+
+    /* --- LIGHTBOX ALBUM VIEWER --- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(15, 17, 20, 0.94);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: #fff;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .lightbox-box {
+      max-width: 960px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .lightbox-media {
+      width: 100%;
+      max-height: 72vh;
+      aspect-ratio: 16 / 10;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #1f242b;
+    }
+    .lightbox-media svg, .lightbox-media img, .lightbox-media video {
+      width: 100%; height: 100%; object-fit: contain; display: block;
+    }
+    .lightbox-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .lightbox-title { font-family: var(--serif); font-size: 1.6rem; }
+    .lightbox-loc { font-family: var(--mono); font-size: 0.78rem; color: #f3a683; }
+    .modal-close {
+      position: fixed;
+      top: 20px; right: 24px;
+      background: rgba(255,255,255,0.14);
+      border: none; color: #fff;
+      width: 42px; height: 42px; border-radius: 50%;
+      font-size: 1.3rem; cursor: pointer;
+    }
+    .lb-nav {
+      display: flex; gap: 10px;
+    }
+    .lb-btn {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; padding: 8px 16px; border-radius: 999px;
+      cursor: pointer; font-family: var(--sans); font-size: 0.85rem;
+    }
+    .lb-btn:hover { background: var(--accent); border-color: var(--accent); }
+
+    /* --- INSTA STORY VIEWER --- */
+    .story-phone {
+      width: 100%;
+      max-width: 390px;
+      height: 680px;
+      max-height: 88vh;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      background: #111;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+    }
+    .story-progress {
+      position: absolute; top: 12px; left: 12px; right: 12px; z-index: 5;
+      display: flex; gap: 5px;
+    }
+    .prog-seg {
+      flex: 1; height: 3px; border-radius: 2px;
+      background: rgba(255,255,255,0.3); overflow: hidden;
+    }
+    .prog-fill { height: 100%; width: 0%; background: #fff; }
+    .prog-seg.done .prog-fill { width: 100%; }
+    .prog-seg.current .prog-fill { width: 100%; transition: width 4s linear; }
+    .story-head {
+      position: absolute; top: 24px; left: 14px; z-index: 5;
+      font-size: 0.85rem; font-weight: 600; text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    }
+    .story-stage { width: 100%; height: 100%; position: relative; }
+    .story-stage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .story-caption {
+      position: absolute; bottom: 28px; left: 18px; right: 18px;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(8px);
+      padding: 12px 16px; border-radius: 12px; font-size: 0.92rem;
+    }
+    .story-tap-left, .story-tap-right {
+      position: absolute; top: 0; bottom: 0; width: 40%; z-index: 4; cursor: pointer;
+    }
+    .story-tap-left { left: 0; }
+    .story-tap-right { right: 0; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 64px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer strong { color: var(--ink); font-family: var(--serif); font-size: 1.4rem; display: block; margin-bottom: 6px; }
+
+    /* Responsive */
+    @media (max-width: 1180px) {
+      .hero-collage {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: min(100%, 520px);
+        height: 205px;
+        margin: 24px auto 28px;
+      }
+      .hero-collage img:nth-child(1) { top: 3%; left: 15%; width: 26%; }
+      .hero-collage img:nth-child(2) { top: 0; right: 9%; width: 28%; }
+      .hero-collage img:nth-child(3) { top: 33%; left: 1%; width: 25%; }
+      .hero-collage img:nth-child(4) { top: 29%; right: 2%; width: 27%; }
+      .hero-collage img:nth-child(5) { bottom: 0; left: 22%; width: 25%; }
+      .hero-collage img:nth-child(6) { bottom: 3%; right: 20%; width: 25%; }
+    }
+    @media (max-width: 920px) {
+      .atlas-container { grid-template-columns: 1fr; }
+      .map-column {
+        position: sticky; top: 58px; height: min(46vh, 400px); min-height: 350px;
+        padding: 10px 14px; z-index: 800; background: var(--bg);
+      }
+      .chapters-column { padding: 16px 18px 80px; }
+      .photo-card:not(.wide) { aspect-ratio: 1 / 1; }
+      .hero {
+        background-size: 100% 100%, auto 78%;
+        background-position: center, right 32% center;
+      }
+      .journey-map-header { padding: 14px 16px 12px; }
+      .journey-map-footer { padding: 12px 16px 14px; }
+      .map-map-title { font-size: 1.15rem; }
+      .checkpoint-list { padding: 12px 8px; }
+      .checkpoint-list::before,
+      .checkpoint-progress { left: 29px; }
+      .map-checkpoint {
+        grid-template-columns: 26px minmax(0, 1fr) auto;
+        gap: 9px;
+        padding: 5px 8px;
+      }
+      .checkpoint-dot { width: 24px; height: 24px; font-size: 0.54rem; }
+      .checkpoint-copy strong { font-size: 0.7rem; }
+      .checkpoint-copy small { font-size: 0.52rem; }
+      .checkpoint-status { font-size: 0.49rem; }
+      .route-card { padding: 16px; }
+      .route-card h3 { font-size: 1.35rem; }
+      .route-play { padding: 8px 11px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">Kruparth's Journey</div>
+    <a class="insta-pill" href="#chaptersList">
+      <span class="insta-dot"></span> Explore the journey
+    </a>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">Kruparth's journey · 2023 to present</div>
+    <h1>From Bengaluru to <em>Germany</em></h1>
+    <p class="hero-sub">
+      Every big story begins with a dream. In 2023, I left Bengaluru with a suitcase full of hopes and the courage to start a new chapter in Germany. My flight to Germany was the first step toward the future I had imagined. The journey is still unfolding.
+    </p>
+
+    <div class="hero-collage" aria-hidden="true">
+      <img src="assets/hero-collage/memory-01.jpg" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/hero-collage/memory-02.jpg" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/hero-collage/memory-03.jpg" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/hero-collage/memory-04.jpg" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/hero-collage/memory-05.jpg" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/hero-collage/memory-06.jpg" alt="" decoding="async" fetchpriority="low">
+    </div>
+
+    <div class="hero-bar">
+      <div class="stats">
+        <div><div class="stat-val" id="statChapterCount">5</div><div class="stat-lbl">Chapters</div></div>
+        <div><div class="stat-val" id="statCountryCount">5</div><div class="stat-lbl">Countries</div></div>
+        <div><div class="stat-val" id="statMediaCount">39</div><div class="stat-lbl">Media</div></div>
+      </div>
+
+      <!-- Journey highlights -->
+      <div class="stories-wrap" id="storiesBar"></div>
+    </div>
+  </section>
+
+  <!-- Scrollytelling Split Layout -->
+  <main class="atlas-container">
+    <aside class="map-column">
+      <div class="map-frame">
+        <div class="journey-map" id="journeyMap" data-active="frankfurt">
+          <div class="journey-map-header">
+            <div>
+              <span class="map-overline">Country checkpoints</span>
+              <strong class="map-map-title">Germany &amp; beyond</strong>
+            </div>
+            <span class="map-era">2023 TO PRESENT</span>
+          </div>
+          <div class="checkpoint-list" id="checkpointList" aria-label="Country checkpoints">
+            <span class="checkpoint-progress" aria-hidden="true"></span>
+          </div>
+          <div class="journey-map-footer">
+            <span class="map-current-label">CURRENT CHECKPOINT</span>
+            <strong class="map-current-place" id="mapCurrentPlace">Germany</strong>
+            <span class="map-current-detail" id="mapCurrentDetail">Arrival · November 5, 2023</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <section class="chapters-column" id="chaptersList"></section>
+  </main>
+
+  <footer>
+    <strong>The journey is still unfolding</strong>
+    New dreams, places, and memories will find their way into the story.
+  </footer>
+
+  <!-- Photo Album Lightbox -->
+  <div class="modal-overlay" id="lightbox">
+    <button class="modal-close" onclick="closeLightbox()">&times;</button>
+    <div class="lightbox-box">
+      <div class="lightbox-media" id="lbMedia"></div>
+      <div class="lightbox-info">
+        <div>
+          <div class="lightbox-loc" id="lbLoc"></div>
+          <div class="lightbox-title" id="lbCap"></div>
+        </div>
+        <div class="lb-nav">
+          <button class="lb-btn" onclick="stepLightbox(-1)">← Prev</button>
+          <button class="lb-btn" onclick="stepLightbox(1)">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insta Story Modal -->
+  <div class="modal-overlay" id="storyModal">
+    <button class="modal-close" onclick="closeStory()">&times;</button>
+    <div class="story-phone">
+      <div class="story-progress" id="storyProg"></div>
+      <div class="story-head" id="storyHead"></div>
+      <div class="story-stage" id="storyStage"></div>
+      <div class="story-caption" id="storyCap"></div>
+      <div class="story-tap-left" onclick="stepStory(-1)"></div>
+      <div class="story-tap-right" onclick="stepStory(1)"></div>
+    </div>
+  </div>
+
+  <script>
+    const TRIP_STOPS = [
+      {
+        id: "stop-germany",
+        firstTravelDate: "2023-11-05",
+        title: "Germany",
+        country: "Germany",
+        flag: "🇩🇪",
+        date: "November 5 to December 23, 2023",
+        travelDate: "November 5, 2023",
+        mapCheckpoint: "germany",
+        story: "I came to Germany for my master's degree. I flew from Bengaluru to Frankfurt on November 5, 2023, then continued to Chemnitz by train. The first days brought tram-lined streets, autumn trees, and the small details of settling into a new place.",
+        showJourneyRoute: true,
+        photos: [
+          { wide: true, image: "Chemnitz%20germany%20/1.jpg", alt: "A selfie aboard the flight from India to Germany", caption: "The journey begins above the clouds", tag: "Germany" },
+          { wide: true, image: "Chemnitz%20germany%20/IMG20231106113201.jpg", alt: "A tram street in Chemnitz on November 6", caption: "First streets in Chemnitz", tag: "November 6" },
+          { wide: false, image: "Chemnitz%20germany%20/IMG20231106103919.jpg", alt: "Rooftops and autumn trees in Chemnitz", caption: "A November view over the city", tag: "November 6" },
+          { wide: false, image: "Chemnitz%20germany%20/5.jpg", alt: "A portrait among golden autumn leaves", caption: "Autumn colors in Germany", tag: "Chemnitz" },
+          { wide: true, image: "Chemnitz%20germany%20/IMG-20231118-WA0121.jpg", alt: "A November moment from the Germany photo album", caption: "A November moment", tag: "November 18" },
+          { wide: false, image: "Chemnitz%20germany%20/IMG-20231202-WA0001.jpg", alt: "A December moment from the Germany photo album", caption: "December days", tag: "December 2" },
+          { wide: false, image: "Chemnitz%20germany%20/IMG-20231216-WA0032.jpg", alt: "A December moment from the Germany photo album", caption: "A winter memory", tag: "December 16" },
+          { wide: false, image: "Chemnitz%20germany%20/IMG-20231223-WA0023.jpg", alt: "A moment from the Germany photo album", caption: "The days before Christmas", tag: "December 23" },
+          { wide: false, image: "Chemnitz%20germany%20/IMG-20231223-WA0034.jpg", alt: "A moment from the Germany photo album", caption: "A December frame", tag: "December 23" },
+          { wide: true, image: "Chemnitz%20germany%20/Snapchat-1876550658.jpg", alt: "A mirror selfie from the Germany photo album", caption: "A little moment from home", tag: "Germany" }
+        ]
+      },
+      {
+        id: "stop-czechia",
+        firstTravelDate: "2023-12-26",
+        title: "Czechia",
+        country: "Czechia",
+        flag: "🇨🇿",
+        date: "December 26 to 29, 2023 · March 13, 2025",
+        travelDate: "Dec 26 to 29, 2023 · Mar 13, 2025",
+        mapCheckpoint: "czechia",
+        story: "I first visited Prague from December 26 to 29, 2023, then returned on March 13, 2025. The winter lights, grand architecture, lively streets, and an evening out gave me two distinct perspectives on the city.",
+        photos: [
+          { wide: true, image: "Prague/IMG-20231226-WA0246.jpg", alt: "A Prague memory from December 26", caption: "Prague, in the middle of winter", tag: "December 26" },
+          { wide: false, image: "Prague/IMG-20231226-WA0296.jpg", alt: "A Prague memory from December 26", caption: "A day to remember", tag: "December 26" },
+          { wide: false, image: "Prague/IMG-20231226-WA0321.jpg", alt: "A Prague memory from December 26", caption: "Another frame from the city", tag: "December 26" },
+          { wide: false, image: "Prague/IMG-20231227-WA0051.jpg", alt: "A Prague memory from December 27", caption: "The next day in Prague", tag: "December 27" },
+          { wide: false, image: "Prague/IMG-20231227-WA0082.jpg", alt: "A Prague memory from December 27", caption: "A winter afternoon", tag: "December 27" },
+          { wide: true, image: "Prague/IMG-20231227-WA0187.jpg", alt: "A Prague memory from December 27", caption: "City lights and winter colors", tag: "December 27" },
+          { wide: false, image: "Prague/IMG-20231227-WA0196.jpg", alt: "A Prague memory from December 27", caption: "A moment in Prague", tag: "December 27" },
+          { wide: false, image: "Prague/IMG-20231227-WA0201.jpg", alt: "A Prague memory beside the river at dusk", caption: "Evening by the river", tag: "December 27" },
+          { wide: false, image: "Prague/IMG-20231227-WA0249.jpg", alt: "A Prague memory from December 27", caption: "A final look around", tag: "December 27" },
+          { wide: false, image: "Prague/IMG-20231227-WA0251.jpg", alt: "A Prague memory from December 27", caption: "One more city view", tag: "December 27" },
+          { wide: true, image: "Prague/IMG-20231227-WA0310.jpg", alt: "A Prague memory from December 27", caption: "Until the next journey", tag: "December 27" },
+          { wide: false, image: "assets/instagram/prague-march-2025-01.png", alt: "Kruparth standing beside a sports car in Prague", caption: "A Prague arrival moment", tag: "March 13, 2025" },
+          { wide: false, image: "assets/instagram/prague-march-2025-02.png", alt: "Prague Castle and illuminated city views after dark", caption: "Prague after dark", tag: "March 13, 2025" },
+          { wide: false, image: "assets/instagram/prague-march-2025-03.png", alt: "Kruparth in front of St. Vitus Cathedral in Prague", caption: "Looking up at history", tag: "March 13, 2025" },
+          { wide: false, image: "assets/instagram/prague-march-2025-04.png", alt: "The Dancing House in Prague", caption: "A modern landmark", tag: "March 13, 2025" },
+          { wide: false, image: "assets/instagram/prague-march-2025-05.png", alt: "Prague's Astronomical Clock in Old Town Square", caption: "Rainy day at the clock", tag: "March 13, 2025" },
+          { wide: false, image: "assets/instagram/prague-march-2025-06.png", alt: "A nightlife scene in Prague", caption: "Prague after hours", tag: "March 13, 2025" }
+        ]
+      },
+      {
+        id: "stop-netherlands",
+        firstTravelDate: "2024-08-11",
+        title: "Netherlands",
+        country: "Netherlands",
+        flag: "🇳🇱",
+        date: "August 11 to 14, 2024",
+        travelDate: "August 11 to 14, 2024",
+        mapCheckpoint: "netherlands",
+        story: "I spent August 11 to 14, 2024 exploring Amsterdam. I loved the colorful street art, the canals, and the windmills just outside the city.",
+        photos: [
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-01.png", alt: "Kruparth jumping in front of colorful street art in the Netherlands", caption: "A moment in Amsterdam", tag: "Street art" },
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-02.png", alt: "Kruparth beside a painted wall in the Netherlands", caption: "Color on every corner", tag: "Street art" },
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-03.png", alt: "A view labeled Amsterdam, Netherlands", caption: "Amsterdam, Netherlands", tag: "City view" },
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-07.png", alt: "A modern waterfront building in Amsterdam", caption: "A view across the water", tag: "Waterfront" },
+          { wide: true, image: "assets/instagram/netherlands-amsterdam-04.png", alt: "Kruparth beside windmills in the Dutch countryside", caption: "Windmills beyond the city", tag: "Countryside" },
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-05.png", alt: "Kruparth beside a canal in Amsterdam", caption: "Along the canals", tag: "Canals" },
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-06.png", alt: "Kruparth posing beside colorful street art", caption: "Street art and movement", tag: "Street art" }
+        ]
+      },
+      {
+        id: "stop-france",
+        firstTravelDate: "2025-12-09",
+        title: "France",
+        country: "France",
+        flag: "🇫🇷",
+        date: "December 9 to 12, 2025",
+        travelDate: "Dec 9 to 12, 2025",
+        mapCheckpoint: "france",
+        story: "I spent December 9 to 12, 2025 in Paris, taking in the Louvre’s glass pyramid and seeing the Mona Lisa up close. It was a short trip filled with moments I had imagined for years.",
+        photos: [
+          { wide: true, image: "assets/instagram/france-paris-01.jpg", alt: "A Paris memory from France", caption: "Paris in a frame", tag: "France" },
+          { wide: false, image: "assets/instagram/france-paris-02.jpg", alt: "A Paris memory from France", caption: "A moment in Paris", tag: "France" },
+          { wide: false, image: "assets/instagram/france-paris-03.jpg", alt: "A Paris memory from France", caption: "A city memory", tag: "France" },
+          { wide: false, image: "assets/instagram/france-paris-04.jpg", alt: "A Paris memory from France", caption: "A day to remember", tag: "France" },
+          { wide: false, image: "assets/instagram/france-paris-05.jpg", alt: "A Paris memory from France", caption: "Paris, saved in a photo", tag: "France" },
+          { wide: true, image: "assets/instagram/france-paris-06.jpg", alt: "A Paris memory from France", caption: "One more city moment", tag: "France" },
+          { wide: false, image: "assets/instagram/france-paris-2025-12-01.png", alt: "Kruparth beside the glass pyramid at the Louvre in Paris", caption: "A moment at the Louvre", tag: "December 9 to 12, 2025" },
+          { wide: false, image: "assets/instagram/france-paris-2025-12-02.png", alt: "The Mona Lisa on display at the Louvre in Paris", caption: "The Mona Lisa, up close", tag: "December 9 to 12, 2025" },
+          { wide: false, image: "assets/instagram/france-disney-01.jpg", alt: "A childhood-dream visit to Disneyland Paris", caption: "A childhood dream", tag: "France" },
+          { wide: false, image: "assets/instagram/france-disney-02.jpg", alt: "A childhood-dream visit to Disneyland Paris", caption: "A little magic", tag: "France" },
+          { wide: true, type: "video", image: "assets/instagram/france-paris-video-01.mp4", poster: "assets/instagram/france-paris-01.jpg", alt: "A Paris memory in motion", caption: "Paris in motion", tag: "France" },
+          { wide: false, type: "video", image: "assets/instagram/france-paris-video-02.mp4", poster: "assets/instagram/france-paris-02.jpg", alt: "A Paris memory in motion", caption: "A city moment in motion", tag: "France" },
+          { wide: true, type: "video", image: "assets/instagram/france-disney-video-01.mp4", poster: "assets/instagram/france-disney-01.jpg", alt: "A Disneyland Paris memory in motion", caption: "A dream day in motion", tag: "France" },
+          { wide: false, type: "video", image: "assets/instagram/france-disney-video-02.mp4", poster: "assets/instagram/france-disney-02.jpg", alt: "A Disneyland Paris memory in motion", caption: "A little magic in motion", tag: "France" },
+          { wide: true, type: "video", image: "assets/instagram/france-disney-video-03.mp4", poster: "assets/instagram/france-disney-01.jpg", alt: "A Disneyland Paris memory in motion", caption: "A childhood dream, remembered", tag: "France" }
+        ]
+      },
+      {
+        id: "stop-hungary",
+        firstTravelDate: "2024-12-31",
+        title: "Hungary",
+        country: "Hungary",
+        flag: "🇭🇺",
+        date: "December 31, 2024 to January 3, 2025",
+        travelDate: "Dec 31, 2024 to Jan 3, 2025",
+        mapCheckpoint: "hungary",
+        story: "I celebrated New Year in Budapest with my friends, welcoming 2025 together. From riverside views to days exploring the city, those moments made the trip one I’ll always remember.",
+        photos: [
+          { wide: true, image: "assets/instagram/hungary-01.jpg", alt: "A Budapest memory from Hungary", caption: "Somewhere between the past and the present", tag: "Hungary" },
+          { wide: false, image: "assets/instagram/hungary-02.jpg", alt: "A Budapest memory from Hungary", caption: "A city moment", tag: "Hungary" },
+          { wide: false, image: "assets/instagram/hungary-03.jpg", alt: "A Budapest memory from Hungary", caption: "A day to remember", tag: "Hungary" },
+          { wide: true, image: "assets/instagram/hungary-04.jpg", alt: "A Budapest memory from Hungary", caption: "One more Budapest frame", tag: "Hungary" },
+          { wide: true, image: "assets/instagram/hungary-new-year-01.png", alt: "Kruparth celebrating New Year in Budapest with friends", caption: "New Year with my friends", tag: "New Year" },
+          { wide: false, image: "assets/instagram/hungary-new-year-02.png", alt: "Kruparth by the Danube in Budapest", caption: "A moment by the Danube", tag: "Budapest" },
+          { wide: false, image: "assets/instagram/hungary-new-year-03.png", alt: "Kruparth holding an RCB flag beside the Danube", caption: "A little team pride", tag: "RCB" },
+          { wide: false, image: "assets/instagram/hungary-new-year-04.png", alt: "Kruparth and a friend by the Danube in Budapest", caption: "Akka, my partner in crime", tag: "Friends" },
+          { wide: false, image: "assets/instagram/hungary-new-year-05.png", alt: "Kruparth with friends beside the Danube in Budapest", caption: "The best kind of company", tag: "Friends" }
+        ]
+      },
+      {
+        id: "stop-austria",
+        firstTravelDate: "2025-03-10",
+        title: "Austria",
+        country: "Austria",
+        flag: "🇦🇹",
+        date: "March 10 to 12, 2025",
+        travelDate: "March 10 to 12, 2025",
+        mapCheckpoint: "austria",
+        story: "I spent March 10 to 12, 2025 in Austria, taking in Vienna’s grand Schönbrunn Palace and pausing for a taste of the city’s famous café culture. A few days, a lot to remember.",
+        photos: [
+          { wide: false, image: "assets/instagram/austria-vienna-2025-01.png", alt: "A slice of Sachertorte at Café Sacher in Vienna", caption: "A sweet pause at Café Sacher", tag: "Vienna" },
+          { wide: false, image: "assets/instagram/austria-vienna-2025-02.png", alt: "Kruparth in the courtyard of Schönbrunn Palace in Vienna", caption: "A day at Schönbrunn", tag: "Vienna" },
+          { wide: false, image: "assets/instagram/austria-vienna-2025-03.png", alt: "The courtyard of Schönbrunn Palace in Vienna", caption: "Grandeur in every direction", tag: "Schönbrunn Palace" }
+        ]
+      },
+      {
+        id: "stop-switzerland",
+        firstTravelDate: "2025-05-31",
+        title: "Switzerland",
+        country: "Switzerland",
+        flag: "🇨🇭",
+        date: "Rheinfall · May 31, 2025 | Zurich · August 14, 2026",
+        travelDate: "Rheinfall · May 31, 2025 · Zurich · Aug 14, 2026",
+        mapCheckpoint: "switzerland",
+        story: "I first saw the Rhine Falls on May 31, 2025, then returned for a day in Zurich on August 14, 2026. From the roar of the falls to city streets and a stop at the Lindt Home of Chocolate near Zurich, each visit gave me a different Swiss memory.",
+        photos: [
+          { wide: true, image: "assets/instagram/switzerland-01.jpg", alt: "A lakeside memory from Switzerland", caption: "Mentally, I’m still here", tag: "Switzerland" },
+          { wide: false, image: "assets/instagram/switzerland-rheinfall-2025-01.png", alt: "Kruparth by the Rhine Falls at Rheinfall, Switzerland", caption: "A moment at Rheinfall", tag: "May 31, 2025" },
+          { wide: false, image: "assets/instagram/switzerland-rheinfall-2025-02.png", alt: "The Rhine Falls in full flow", caption: "The falls in all their power", tag: "May 31, 2025" },
+          { wide: false, image: "assets/instagram/switzerland-zurich-2026-01.png", alt: "Kruparth at the Lindt Home of Chocolate near Zurich", caption: "A sweet stop near Zurich", tag: "August 14, 2026" },
+          { wide: false, image: "assets/instagram/switzerland-zurich-2026-02.png", alt: "A tree-lined Zurich street with Swiss flags", caption: "A walk through Zurich", tag: "August 14, 2026" },
+          { wide: false, image: "assets/instagram/switzerland-zurich-2026-03.png", alt: "Kruparth on a Zurich street", caption: "A Zurich afternoon", tag: "August 14, 2026" }
+        ]
+      }
+    ];
+
+    TRIP_STOPS.sort((a, b) => a.firstTravelDate.localeCompare(b.firstTravelDate));
+    TRIP_STOPS.forEach((stop, index) => {
+      stop.num = String(index + 1).padStart(2, "0");
+    });
+
+    const STORIES = [
+      { title: "The flight", icon: "✈️", bg: "#c85a32", slides: [
+        { cap: "On November 5, 2023, I flew from Bengaluru to Frankfurt.", image: "Chemnitz%20germany%20/1.jpg", alt: "A selfie aboard the flight" }
+      ]},
+      { title: "Germany", icon: "🇩🇪", bg: "#2b5876", slides: [
+        { cap: "First streets in Chemnitz, November 6.", image: "Chemnitz%20germany%20/IMG20231106113201.jpg", alt: "A tram street in Chemnitz" },
+        { cap: "Golden autumn days in Germany.", image: "Chemnitz%20germany%20/5.jpg", alt: "A portrait among golden autumn leaves" }
+      ]},
+      { title: "Czechia", icon: "🇨🇿", bg: "#355c7d", slides: [
+        { cap: "My first Prague visit was December 26 to 29, 2023.", image: "Prague/IMG-20231227-WA0201.jpg", alt: "A Prague memory beside the river at dusk" },
+        { cap: "Back in Prague on March 13, 2025.", image: "assets/instagram/prague-march-2025-04.png", alt: "The Dancing House in Prague" }
+      ]},
+      { title: "Netherlands", icon: "🇳🇱", bg: "#537b92", slides: [
+        { cap: "Amsterdam, August 11 to 14, 2024.", image: "assets/instagram/netherlands-amsterdam-03.png", alt: "A view labeled Amsterdam, Netherlands" },
+        { cap: "A modern waterfront building in Amsterdam.", image: "assets/instagram/netherlands-amsterdam-07.png", alt: "A modern waterfront building in Amsterdam" },
+        { cap: "Windmills beyond the city.", image: "assets/instagram/netherlands-amsterdam-04.png", alt: "Windmills in the Netherlands" }
+      ]},
+      { title: "Hungary", icon: "🇭🇺", bg: "#8b4e56", slides: [
+        { cap: "New Year in Budapest with my friends, December 31, 2024 to January 3, 2025.", image: "assets/instagram/hungary-new-year-01.png", alt: "Kruparth celebrating New Year in Budapest with friends" },
+        { cap: "A moment by the Danube.", image: "assets/instagram/hungary-new-year-02.png", alt: "Kruparth by the Danube in Budapest" },
+        { cap: "The best memories are made together.", image: "assets/instagram/hungary-new-year-05.png", alt: "Kruparth with friends beside the Danube in Budapest" }
+      ]},
+      { title: "Austria", icon: "🇦🇹", bg: "#c65b4d", slides: [
+        { cap: "Vienna, March 10 to 12, 2025.", image: "assets/instagram/austria-vienna-2025-01.png", alt: "A slice of Sachertorte at Café Sacher in Vienna" },
+        { cap: "A day at Schönbrunn Palace.", image: "assets/instagram/austria-vienna-2025-02.png", alt: "Kruparth in the courtyard of Schönbrunn Palace in Vienna" },
+        { cap: "Grandeur in every direction.", image: "assets/instagram/austria-vienna-2025-03.png", alt: "The courtyard of Schönbrunn Palace in Vienna" }
+      ]},
+      { title: "Switzerland", icon: "🇨🇭", bg: "#b94137", slides: [
+        { cap: "Rheinfall, May 31, 2025.", image: "assets/instagram/switzerland-rheinfall-2025-01.png", alt: "Kruparth by the Rhine Falls at Rheinfall, Switzerland" },
+        { cap: "The Rhine Falls in full flow.", image: "assets/instagram/switzerland-rheinfall-2025-02.png", alt: "The Rhine Falls in full flow" },
+        { cap: "Zurich, August 14, 2026.", image: "assets/instagram/switzerland-zurich-2026-02.png", alt: "A tree-lined Zurich street with Swiss flags" },
+        { cap: "A sweet stop near Zurich.", image: "assets/instagram/switzerland-zurich-2026-01.png", alt: "Kruparth at the Lindt Home of Chocolate near Zurich" },
+        { cap: "A Zurich afternoon.", image: "assets/instagram/switzerland-zurich-2026-03.png", alt: "Kruparth on a Zurich street" }
+      ]},
+      { title: "France", icon: "🇫🇷", bg: "#355c7d", slides: [
+        { cap: "Paris, December 9 to 12, 2025.", image: "assets/instagram/france-paris-2025-12-01.png", alt: "Kruparth beside the glass pyramid at the Louvre in Paris" },
+        { cap: "A moment with the Mona Lisa at the Louvre.", image: "assets/instagram/france-paris-2025-12-02.png", alt: "The Mona Lisa on display at the Louvre in Paris" },
+        { cap: "A moment from France.", image: "assets/instagram/france-paris-01.jpg", alt: "A Paris memory from France" },
+        { cap: "A childhood dream at Disneyland Paris.", image: "assets/instagram/france-disney-01.jpg", alt: "A childhood-dream visit to Disneyland Paris" }
+      ]}
+    ];
+
+    const CHECKPOINTS = TRIP_STOPS.map(stop => ({
+      id: stop.mapCheckpoint,
+      country: stop.country,
+      flag: stop.flag,
+      detail: stop.travelDate || "Travel date to be added",
+      chapterId: stop.id
+    }));
+
+    // 2. RENDER CHAPTERS & FLAT PHOTO INDEX FOR LIGHTBOX
+    const allMedia = [];
+    const chaptersEl = document.getElementById("chaptersList");
+
+    TRIP_STOPS.forEach((stop, sIdx) => {
+      const cardsHtml = stop.photos.map(p => {
+        const idx = allMedia.length;
+        allMedia.push({ ...p, place: stop.country });
+        const mediaHtml = p.type === "video"
+          ? `<video src="${p.image}" poster="${p.poster}" preload="none" muted playsinline aria-label="${p.alt}"></video>`
+          : `<img src="${p.image}" alt="${p.alt}" loading="lazy">`;
+        return `
+          <div class="photo-card ${p.wide ? 'wide' : ''} ${p.type === "video" ? "is-video" : ""}" onclick="openLightbox(${idx})">
+            <div class="photo-media">${mediaHtml}</div>
+            <div class="photo-caption-bar">
+              <span>${p.caption}</span>
+              <span class="photo-tag">${p.tag}</span>
+            </div>
+          </div>`;
+      }).join("");
+
+      chaptersEl.insertAdjacentHTML("beforeend", `
+        <article class="chapter ${sIdx === 0 ? 'active' : ''}" id="${stop.id}" data-index="${sIdx}">
+          <div class="chapter-meta">
+            <span class="chapter-num">CHAPTER ${stop.num}</span>
+            ${stop.date
+              ? `<span>${stop.date}</span>`
+              : `<span class="chapter-date-pending">Journey date to be added</span>`}
+          </div>
+          <h2>${stop.title}</h2>
+          <p class="chapter-story">${stop.story}</p>
+          ${stop.showJourneyRoute ? `
+            <div class="route-card" id="journeyRoute">
+              <div class="route-card-head">
+                <div>
+                  <div class="route-kicker">NOVEMBER 5, 2023 · ARRIVAL ROUTE</div>
+                  <h3>One flight, then a train</h3>
+                </div>
+                <button class="route-play" type="button" onclick="replayJourney()">Replay route</button>
+              </div>
+              <div class="route-track" aria-hidden="true">
+                <span class="route-leg flight-leg"></span>
+                <span class="route-leg train-leg"></span>
+                <span class="route-stop start"></span>
+                <span class="route-stop transfer"></span>
+                <span class="route-stop end"></span>
+                <span class="route-vehicle route-air" aria-hidden="true"></span>
+                <span class="route-vehicle route-rail" aria-hidden="true"></span>
+              </div>
+              <div class="route-stops">
+                <div class="route-stop-label"><strong>Bengaluru</strong><span>Airport · BLR</span></div>
+                <div class="route-stop-label"><strong>Frankfurt</strong><span>Airport · FRA</span></div>
+                <div class="route-stop-label"><strong>Chemnitz</strong><span>By train</span></div>
+              </div>
+              <p class="route-status" id="journeyStatus" aria-live="polite">Flight from Bengaluru to Frankfurt, then train to Chemnitz.</p>
+            </div>
+          ` : ""}
+          <div class="album-grid">${cardsHtml}</div>
+        </article>
+      `);
+    });
+
+    document.getElementById("statChapterCount").textContent = TRIP_STOPS.length;
+    document.getElementById("statCountryCount").textContent =
+      new Set(TRIP_STOPS.map(stop => stop.country)).size;
+    document.getElementById("statMediaCount").textContent = allMedia.length;
+
+    // 3. RENDER STORY BUBBLES
+    const storiesBar = document.getElementById("storiesBar");
+    STORIES.forEach((st, idx) => {
+      storiesBar.insertAdjacentHTML("beforeend", `
+        <button class="story-btn" onclick="openStory(${idx})">
+          <div class="story-ring">
+            <div class="story-thumb" style="background:${st.bg}">${st.icon}</div>
+          </div>
+          <span class="story-label">${st.title}</span>
+        </button>
+      `);
+    });
+
+    // 4. SCROLL-AWARE JOURNEY MAP
+    const journeyMap = document.getElementById("journeyMap");
+    const checkpointList = document.getElementById("checkpointList");
+    checkpointList.style.setProperty("--checkpoint-count", CHECKPOINTS.length);
+    CHECKPOINTS.forEach((checkpoint, index) => {
+      const button = document.createElement("button");
+      button.className = "map-checkpoint";
+      button.dataset.checkpoint = checkpoint.id;
+      button.type = "button";
+      button.setAttribute("aria-label", `Scroll to ${checkpoint.country} chapter`);
+      button.innerHTML = `
+        <span class="checkpoint-dot">${String(index + 1).padStart(2, "0")}</span>
+        <span class="checkpoint-copy">
+          <strong><span class="checkpoint-flag" aria-hidden="true">${checkpoint.flag}</span>${checkpoint.country}</strong>
+          <small>${checkpoint.detail}</small>
+        </span>
+        <span class="checkpoint-status"></span>`;
+      button.addEventListener("click", () => goToChapter(checkpoint.chapterId));
+      checkpointList.appendChild(button);
+    });
+
+    function updateJourneyMap(checkpointId) {
+      const checkpointIndex = CHECKPOINTS.findIndex(checkpoint => checkpoint.id === checkpointId);
+      if (checkpointIndex < 0) throw new Error(`Unknown journey checkpoint: ${checkpointId}`);
+      const checkpoint = CHECKPOINTS[checkpointIndex];
+
+      journeyMap.dataset.active = checkpoint.id;
+      journeyMap.style.setProperty(
+        "--route-progress",
+        `${checkpointIndex / (CHECKPOINTS.length - 1) * 80}%`
+      );
+      document.getElementById("mapCurrentPlace").textContent = checkpoint.country;
+      document.getElementById("mapCurrentDetail").textContent = checkpoint.detail;
+      document.querySelectorAll(".map-checkpoint").forEach((button, index) => {
+        button.classList.toggle("visited", index < checkpointIndex);
+        button.classList.toggle("active", index === checkpointIndex);
+        button.querySelector(".checkpoint-status").textContent =
+          index === checkpointIndex ? "NOW" : index < checkpointIndex ? "DONE" : "";
+        if (index === checkpointIndex) button.setAttribute("aria-current", "step");
+        else button.removeAttribute("aria-current");
+      });
+    }
+    updateJourneyMap(TRIP_STOPS[0].mapCheckpoint);
+
+    function goToChapter(chapterId) {
+      document.getElementById(chapterId).scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    let journeyTimers = [];
+    function replayJourney() {
+      journeyTimers.forEach(clearTimeout);
+      journeyTimers = [];
+
+      const route = document.getElementById("journeyRoute");
+      const status = document.getElementById("journeyStatus");
+      route.classList.remove("playing");
+      void route.offsetWidth;
+      route.classList.add("playing");
+      status.textContent = "Taking off from Bengaluru Airport...";
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        status.textContent = "Bengaluru → Frankfurt by air, then onward to Chemnitz by train.";
+        return;
+      }
+
+      journeyTimers.push(setTimeout(() => {
+        status.textContent = "Landed at Frankfurt Airport. The train to Chemnitz is next.";
+      }, 1800));
+      journeyTimers.push(setTimeout(() => {
+        status.textContent = "Arrived in Chemnitz. The master's journey begins.";
+      }, 3300));
+    }
+
+    // 5. SCROLLYTELLING PROGRESS
+    let activeIdx = 0;
+    const chapters = Array.from(document.querySelectorAll(".chapter"));
+    function activateStop(idx) {
+      if (idx === activeIdx) return;
+      activeIdx = idx;
+      const stop = TRIP_STOPS[idx];
+
+      chapters.forEach((el, i) => el.classList.toggle("active", i === idx));
+      updateJourneyMap(stop.mapCheckpoint);
+    }
+
+    let scrollFrame = 0;
+    function updateActiveChapter() {
+      scrollFrame = 0;
+      const activationY = window.innerHeight * 0.45;
+      const nearest = chapters.reduce((closest, chapter, index) => {
+        const bounds = chapter.getBoundingClientRect();
+        const distance = activationY < bounds.top
+          ? bounds.top - activationY
+          : activationY > bounds.bottom ? activationY - bounds.bottom : 0;
+        return distance < closest.distance ? { index, distance } : closest;
+      }, { index: 0, distance: Infinity });
+      activateStop(nearest.index);
+    }
+    function scheduleChapterUpdate() {
+      if (!scrollFrame) scrollFrame = requestAnimationFrame(updateActiveChapter);
+    }
+    window.addEventListener("scroll", scheduleChapterUpdate, { passive: true });
+    window.addEventListener("resize", scheduleChapterUpdate);
+    scheduleChapterUpdate();
+
+    // 6. LIGHTBOX VIEWER
+    let lbIndex = 0;
+    function openLightbox(idx) {
+      lbIndex = idx;
+      renderLightbox();
+      document.getElementById("lightbox").classList.add("open");
+    }
+    function renderLightbox() {
+      const p = allMedia[lbIndex];
+      document.getElementById("lbMedia").innerHTML = p.type === "video"
+        ? `<video src="${p.image}" poster="${p.poster}" controls preload="metadata" playsinline aria-label="${p.alt}"></video>`
+        : `<img src="${p.image}" alt="${p.alt}">`;
+      document.getElementById("lbLoc").textContent = `${p.place} • ${p.tag}`;
+      document.getElementById("lbCap").textContent = p.caption;
+    }
+    function stepLightbox(dir) {
+      lbIndex = (lbIndex + dir + allMedia.length) % allMedia.length;
+      renderLightbox();
+    }
+    function closeLightbox() {
+      document.querySelector("#lbMedia video")?.pause();
+      document.getElementById("lightbox").classList.remove("open");
+    }
+
+    // 7. INSTA STORY VIEWER
+    let curStory = 0, curSlide = 0, storyTimer = null;
+    function openStory(idx) {
+      curStory = idx; curSlide = 0;
+      document.getElementById("storyModal").classList.add("open");
+      renderStory();
+    }
+    function renderStory() {
+      clearTimeout(storyTimer);
+      const st = STORIES[curStory];
+      const slide = st.slides[curSlide];
+      document.getElementById("storyHead").textContent = `${st.icon} ${st.title}`;
+      document.getElementById("storyStage").innerHTML = `<img src="${slide.image}" alt="${slide.alt}">`;
+      document.getElementById("storyCap").textContent = slide.cap;
+
+      const prog = document.getElementById("storyProg");
+      prog.innerHTML = st.slides.map((_, i) =>
+        `<div class="prog-seg ${i < curSlide ? 'done' : ''}"><div class="prog-fill"></div></div>`
+      ).join("");
+      requestAnimationFrame(() => {
+        const seg = prog.children[curSlide];
+        if (seg) seg.classList.add("current");
+      });
+      storyTimer = setTimeout(() => stepStory(1), 4000);
+    }
+    function stepStory(dir) {
+      const st = STORIES[curStory];
+      curSlide += dir;
+      if (curSlide >= st.slides.length) {
+        if (curStory < STORIES.length - 1) { curStory++; curSlide = 0; }
+        else { closeStory(); return; }
+      } else if (curSlide < 0) {
+        if (curStory > 0) { curStory--; curSlide = STORIES[curStory].slides.length - 1; }
+        else { curSlide = 0; }
+      }
+      renderStory();
+    }
+    function closeStory() {
+      clearTimeout(storyTimer);
+      document.getElementById("storyModal").classList.remove("open");
+    }
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") { closeLightbox(); closeStory(); }
+      if (document.getElementById("lightbox").classList.contains("open")) {
+        if (e.key === "ArrowRight") stepLightbox(1);
+        if (e.key === "ArrowLeft") stepLightbox(-1);
+      }
+    });
+  </script>
+</body>
+</html>
