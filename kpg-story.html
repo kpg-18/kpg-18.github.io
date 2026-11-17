@@ -86,7 +86,7 @@
       background-color: #102029;
       background:
         linear-gradient(90deg, rgba(16, 29, 37, 0.98) 0%, rgba(16, 29, 37, 0.9) 42%, rgba(16, 29, 37, 0.24) 100%),
-        url("assets/kruparth-journey-cover.png");
+        url("assets/kruparth-journey-cover.webp");
       background-repeat: no-repeat;
       background-size: 100% 100%, auto 100%;
       background-position: center, right center;
@@ -484,12 +484,14 @@
     .journey-map {
       --map-ink: var(--ink);
       --route-progress: 0%;
-      background: #fff;
+      background:
+        radial-gradient(ellipse at 100% 0, rgba(200, 90, 50, 0.06), transparent 42%),
+        #fff;
     }
     .journey-map-header {
       align-items: flex-start;
-      padding: 22px 22px 18px;
-      border-bottom: 1px solid #eeece7;
+      padding: 22px 22px 17px;
+      border-bottom: 1px solid #eeeae3;
     }
     .map-overline,
     .map-era,
@@ -499,16 +501,20 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
+    .map-overline { color: var(--accent); }
     .map-map-title {
       margin-top: 5px;
-      font: 600 1.35rem/1.15 var(--serif);
+      font: 600 1.55rem/1.05 var(--serif);
+      letter-spacing: -0.015em;
     }
     .map-era {
-      padding: 7px 9px;
-      border: 1px solid #e8e4dc;
-      border-radius: 7px;
-      color: #686a64;
-      letter-spacing: 0.04em;
+      padding: 7px 10px;
+      border: 1px solid #ece6dc;
+      border-radius: 999px;
+      color: #5f665e;
+      background: #faf8f4;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
     }
     .checkpoint-list {
       position: relative;
@@ -516,7 +522,7 @@
       flex: 1;
       grid-template-rows: repeat(var(--checkpoint-count, 5), minmax(0, 1fr));
       min-height: 0;
-      padding: 20px 16px;
+      padding: 18px 16px;
     }
     .checkpoint-list::before,
     .checkpoint-progress {
@@ -548,20 +554,23 @@
       gap: 12px;
       width: 100%;
       min-width: 0;
-      padding: 7px 10px;
+      padding: 8px 10px;
       border: 1px solid transparent;
-      border-radius: 10px;
+      border-radius: 12px;
       background: transparent;
       color: var(--ink);
       text-align: left;
       cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
     .map-checkpoint:hover,
     .map-checkpoint:focus-visible,
     .map-checkpoint.active {
-      border-color: #eee8df;
-      background: #faf8f4;
+      border-color: #eee7dc;
+      background: #fbf8f3;
     }
+    .map-checkpoint:hover { transform: translateX(2px); }
+    .map-checkpoint.active { box-shadow: 0 4px 14px rgba(23, 26, 29, 0.04); }
     .map-checkpoint:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
@@ -619,6 +628,7 @@
       color: #7b7b74;
       font: 0.58rem var(--mono);
       letter-spacing: 0.025em;
+      line-height: 1.45;
     }
     .checkpoint-status {
       color: #85857e;
@@ -626,28 +636,34 @@
       letter-spacing: 0.06em;
       white-space: nowrap;
     }
+    .map-checkpoint.visited .checkpoint-status { color: #617d6d; }
     .map-checkpoint.active .checkpoint-status { color: var(--accent); }
     .journey-map-footer {
       display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 5px 12px;
-      margin: 0;
-      padding: 16px 22px 19px;
-      border-top: 1px solid #eeece7;
-      background: #fff;
-      backdrop-filter: none;
+      grid-template-columns: auto 1fr;
+      align-items: baseline;
+      gap: 4px 10px;
+      margin: 0 16px 16px;
+      padding: 13px 15px;
+      border: 1px solid #eeeae3;
+      border-radius: 12px;
+      background: #faf9f6;
     }
-    .map-current-label { grid-column: 1; }
+    .map-current-label {
+      grid-column: 1 / -1;
+      color: #858078;
+      font-size: 0.55rem;
+    }
     .map-current-place {
       grid-column: 1;
       margin-top: 0;
       font: 600 1.08rem/1.2 var(--serif);
     }
     .map-current-detail {
-      grid-column: 1;
+      grid-column: 2;
       color: #777870;
-      font-size: 0.68rem;
+      font-size: 0.66rem;
+      text-align: right;
     }
 
     /* Chapters Column */
@@ -1035,35 +1051,148 @@
       .hero-collage img:nth-child(6) { bottom: 3%; right: 20%; width: 25%; }
     }
     @media (max-width: 920px) {
-      .atlas-container { grid-template-columns: 1fr; }
+      .atlas-container { grid-template-columns: minmax(0, 1fr); }
       .map-column {
-        position: sticky; top: 58px; height: min(46vh, 400px); min-height: 350px;
-        padding: 10px 14px; z-index: 800; background: var(--bg);
+        position: sticky;
+        top: 52px;
+        height: auto;
+        min-height: 0;
+        min-width: 0;
+        width: 100%;
+        padding: 8px 12px 0;
+        z-index: 800;
+        background: linear-gradient(var(--bg) 82%, rgba(250, 247, 242, 0));
       }
-      .chapters-column { padding: 16px 18px 80px; }
+      .map-frame { height: auto; border-radius: 14px; }
+      .journey-map { display: block; height: auto; overflow: visible; }
+      .chapters-column { min-width: 0; padding: 16px 18px 80px; }
       .photo-card:not(.wide) { aspect-ratio: 1 / 1; }
       .hero {
         background-size: 100% 100%, auto 78%;
         background-position: center, right 32% center;
       }
-      .journey-map-header { padding: 14px 16px 12px; }
-      .journey-map-footer { padding: 12px 16px 14px; }
-      .map-map-title { font-size: 1.15rem; }
-      .checkpoint-list { padding: 12px 8px; }
-      .checkpoint-list::before,
-      .checkpoint-progress { left: 29px; }
-      .map-checkpoint {
-        grid-template-columns: 26px minmax(0, 1fr) auto;
-        gap: 9px;
-        padding: 5px 8px;
+      .journey-map-header { padding: 10px 14px 8px; }
+      .map-overline { font-size: 0.52rem; }
+      .map-map-title { margin-top: 2px; font-size: 1.12rem; }
+      .map-era { padding: 5px 8px; font-size: 0.52rem; }
+      .checkpoint-list {
+        display: flex;
+        flex: none;
+        gap: 7px;
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+        padding: 8px 12px 10px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        scroll-snap-type: x mandatory;
       }
-      .checkpoint-dot { width: 24px; height: 24px; font-size: 0.54rem; }
-      .checkpoint-copy strong { font-size: 0.7rem; }
-      .checkpoint-copy small { font-size: 0.52rem; }
-      .checkpoint-status { font-size: 0.49rem; }
+      .checkpoint-list::-webkit-scrollbar { display: none; }
+      .checkpoint-list::before,
+      .checkpoint-progress {
+        top: 32px;
+        left: 25px;
+        bottom: auto;
+        width: auto;
+        height: 2px;
+      }
+      .checkpoint-list::before { right: 25px; }
+      .checkpoint-progress {
+        right: auto;
+        width: var(--route-progress);
+        max-width: calc(100% - 50px);
+      }
+      .map-checkpoint {
+        flex: 0 0 136px;
+        grid-template-columns: 24px minmax(0, 1fr);
+        gap: 7px;
+        min-height: 48px;
+        padding: 6px 8px;
+        scroll-snap-align: start;
+      }
+      .map-checkpoint:hover { transform: none; }
+      .checkpoint-dot { width: 22px; height: 22px; font-size: 0.52rem; }
+      .checkpoint-copy strong {
+        overflow: hidden;
+        font-size: 0.66rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .checkpoint-copy small {
+        overflow: hidden;
+        margin-top: 2px;
+        font-size: 0.49rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .checkpoint-status { display: none; }
+      .journey-map-footer {
+        display: flex;
+        align-items: baseline;
+        gap: 7px;
+        margin: 0 12px 10px;
+        padding: 8px 11px;
+      }
+      .map-current-label {
+        grid-column: auto;
+        font-size: 0.48rem;
+        white-space: nowrap;
+      }
+      .map-current-place { font-size: 1rem; white-space: nowrap; }
+      .map-current-detail {
+        min-width: 0;
+        overflow: hidden;
+        font-size: 0.58rem;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
       .route-card { padding: 16px; }
       .route-card h3 { font-size: 1.35rem; }
       .route-play { padding: 8px 11px; }
+    }
+    @media (max-width: 480px) {
+      .topbar { padding: 10px 14px; }
+      .brand { font-size: 1.08rem; }
+      .insta-pill { gap: 6px; padding: 6px 10px; font-size: 0.7rem; }
+      .map-column { top: 47px; padding: 6px 8px 0; }
+      .journey-map-header { padding: 8px 11px 6px; }
+      .map-map-title { font-size: 1.02rem; }
+      .map-era { font-size: 0.48rem; }
+      .checkpoint-list { gap: 5px; padding: 7px 9px 8px; }
+      .map-checkpoint { flex-basis: 126px; }
+      .checkpoint-list::before,
+      .checkpoint-progress { left: 22px; }
+      .checkpoint-list::before,
+      .checkpoint-progress { top: 31px; }
+      .checkpoint-list::before { right: 22px; }
+      .checkpoint-progress { max-width: calc(100% - 44px); }
+      .journey-map-footer { gap: 6px; margin: 0 9px 8px; padding: 7px 9px; }
+      .map-current-label { font-size: 0.43rem; letter-spacing: 0.06em; }
+      .map-current-place { font-size: 0.95rem; }
+      .map-current-detail { font-size: 0.53rem; }
+      .chapters-column { padding: 8px 14px 64px; }
+      .chapter { padding: 30px 0 46px; }
+      .chapter-meta { flex-wrap: wrap; gap: 6px 9px; font-size: 0.65rem; }
+      .chapter-story { font-size: 0.92rem; }
+      .album-grid { gap: 8px; }
+      .photo-card { border-radius: 10px; }
+      .photo-caption-bar { padding: 22px 10px 10px; font-size: 0.72rem; }
+      .photo-tag { font-size: 0.56rem; }
+      footer { padding: 42px 18px; font-size: 0.82rem; }
+    }
+    @media (max-width: 360px) {
+      .brand { font-size: 0.98rem; }
+      .insta-pill { padding: 5px 8px; font-size: 0.64rem; }
+      .map-era { padding: 4px 6px; letter-spacing: 0.02em; }
+      .map-current-label { display: none; }
+      .map-current-place { font-size: 0.9rem; }
+      .map-current-detail { font-size: 0.49rem; }
+      .chapters-column { padding-right: 10px; padding-left: 10px; }
+      .photo-caption-bar { gap: 5px; font-size: 0.66rem; }
+      .photo-tag { font-size: 0.51rem; }
     }
   </style>
 </head>
@@ -1084,12 +1213,12 @@
     </p>
 
     <div class="hero-collage" aria-hidden="true">
-      <img src="assets/hero-collage/memory-01.jpg" alt="" decoding="async" fetchpriority="low">
-      <img src="assets/hero-collage/memory-02.jpg" alt="" decoding="async" fetchpriority="low">
-      <img src="assets/hero-collage/memory-03.jpg" alt="" decoding="async" fetchpriority="low">
-      <img src="assets/hero-collage/memory-04.jpg" alt="" decoding="async" fetchpriority="low">
-      <img src="assets/hero-collage/memory-05.jpg" alt="" decoding="async" fetchpriority="low">
-      <img src="assets/hero-collage/memory-06.jpg" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/hero-collage/memory-01.webp" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/hero-collage/memory-02.webp" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/hero-collage/memory-03.webp" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/hero-collage/memory-04.webp" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/hero-collage/memory-05.webp" alt="" decoding="async" fetchpriority="low">
+      <img src="assets/hero-collage/memory-06.webp" alt="" decoding="async" fetchpriority="low">
     </div>
 
     <div class="hero-bar">
@@ -1111,16 +1240,16 @@
         <div class="journey-map" id="journeyMap" data-active="frankfurt">
           <div class="journey-map-header">
             <div>
-              <span class="map-overline">Country checkpoints</span>
-              <strong class="map-map-title">Germany &amp; beyond</strong>
+              <span class="map-overline">THE JOURNEY SO FAR</span>
+              <strong class="map-map-title">Places along the way</strong>
             </div>
-            <span class="map-era">2023 TO PRESENT</span>
+            <span class="map-era" id="mapStopCount">2023 — PRESENT</span>
           </div>
-          <div class="checkpoint-list" id="checkpointList" aria-label="Country checkpoints">
+          <div class="checkpoint-list" id="checkpointList" aria-label="Journey destinations">
             <span class="checkpoint-progress" aria-hidden="true"></span>
           </div>
           <div class="journey-map-footer">
-            <span class="map-current-label">CURRENT CHECKPOINT</span>
+            <span class="map-current-label">NOW EXPLORING</span>
             <strong class="map-current-place" id="mapCurrentPlace">Germany</strong>
             <span class="map-current-detail" id="mapCurrentDetail">Arrival · November 5, 2023</span>
           </div>
@@ -1181,16 +1310,16 @@
         story: "I came to Germany for my master's degree. I flew from Bengaluru to Frankfurt on November 5, 2023, then continued to Chemnitz by train. The first days brought tram-lined streets, autumn trees, and the small details of settling into a new place.",
         showJourneyRoute: true,
         photos: [
-          { wide: true, image: "Chemnitz%20germany%20/1.jpg", alt: "A selfie aboard the flight from India to Germany", caption: "The journey begins above the clouds", tag: "Germany" },
-          { wide: true, image: "Chemnitz%20germany%20/IMG20231106113201.jpg", alt: "A tram street in Chemnitz on November 6", caption: "First streets in Chemnitz", tag: "November 6" },
-          { wide: false, image: "Chemnitz%20germany%20/IMG20231106103919.jpg", alt: "Rooftops and autumn trees in Chemnitz", caption: "A November view over the city", tag: "November 6" },
-          { wide: false, image: "Chemnitz%20germany%20/5.jpg", alt: "A portrait among golden autumn leaves", caption: "Autumn colors in Germany", tag: "Chemnitz" },
-          { wide: true, image: "Chemnitz%20germany%20/IMG-20231118-WA0121.jpg", alt: "A November moment from the Germany photo album", caption: "A November moment", tag: "November 18" },
-          { wide: false, image: "Chemnitz%20germany%20/IMG-20231202-WA0001.jpg", alt: "A December moment from the Germany photo album", caption: "December days", tag: "December 2" },
-          { wide: false, image: "Chemnitz%20germany%20/IMG-20231216-WA0032.jpg", alt: "A December moment from the Germany photo album", caption: "A winter memory", tag: "December 16" },
-          { wide: false, image: "Chemnitz%20germany%20/IMG-20231223-WA0023.jpg", alt: "A moment from the Germany photo album", caption: "The days before Christmas", tag: "December 23" },
-          { wide: false, image: "Chemnitz%20germany%20/IMG-20231223-WA0034.jpg", alt: "A moment from the Germany photo album", caption: "A December frame", tag: "December 23" },
-          { wide: true, image: "Chemnitz%20germany%20/Snapchat-1876550658.jpg", alt: "A mirror selfie from the Germany photo album", caption: "A little moment from home", tag: "Germany" }
+          { wide: true, image: "Chemnitz%20germany%20/1.webp", alt: "A selfie aboard the flight from India to Germany", caption: "The journey begins above the clouds", tag: "Germany" },
+          { wide: true, image: "Chemnitz%20germany%20/IMG20231106113201.webp", alt: "A tram street in Chemnitz on November 6", caption: "First streets in Chemnitz", tag: "November 6" },
+          { wide: false, image: "Chemnitz%20germany%20/IMG20231106103919.webp", alt: "Rooftops and autumn trees in Chemnitz", caption: "A November view over the city", tag: "November 6" },
+          { wide: false, image: "Chemnitz%20germany%20/5.webp", alt: "A portrait among golden autumn leaves", caption: "Autumn colors in Germany", tag: "Chemnitz" },
+          { wide: true, image: "Chemnitz%20germany%20/IMG-20231118-WA0121.webp", alt: "A November moment from the Germany photo album", caption: "A November moment", tag: "November 18" },
+          { wide: false, image: "Chemnitz%20germany%20/IMG-20231202-WA0001.webp", alt: "A December moment from the Germany photo album", caption: "December days", tag: "December 2" },
+          { wide: false, image: "Chemnitz%20germany%20/IMG-20231216-WA0032.webp", alt: "A December moment from the Germany photo album", caption: "A winter memory", tag: "December 16" },
+          { wide: false, image: "Chemnitz%20germany%20/IMG-20231223-WA0023.webp", alt: "A moment from the Germany photo album", caption: "The days before Christmas", tag: "December 23" },
+          { wide: false, image: "Chemnitz%20germany%20/IMG-20231223-WA0034.webp", alt: "A moment from the Germany photo album", caption: "A December frame", tag: "December 23" },
+          { wide: true, image: "Chemnitz%20germany%20/Snapchat-1876550658.webp", alt: "A mirror selfie from the Germany photo album", caption: "A little moment from home", tag: "Germany" }
         ]
       },
       {
@@ -1204,23 +1333,23 @@
         mapCheckpoint: "czechia",
         story: "I first visited Prague from December 26 to 29, 2023, then returned on March 13, 2025. The winter lights, grand architecture, lively streets, and an evening out gave me two distinct perspectives on the city.",
         photos: [
-          { wide: true, image: "Prague/IMG-20231226-WA0246.jpg", alt: "A Prague memory from December 26", caption: "Prague, in the middle of winter", tag: "December 26" },
-          { wide: false, image: "Prague/IMG-20231226-WA0296.jpg", alt: "A Prague memory from December 26", caption: "A day to remember", tag: "December 26" },
-          { wide: false, image: "Prague/IMG-20231226-WA0321.jpg", alt: "A Prague memory from December 26", caption: "Another frame from the city", tag: "December 26" },
-          { wide: false, image: "Prague/IMG-20231227-WA0051.jpg", alt: "A Prague memory from December 27", caption: "The next day in Prague", tag: "December 27" },
-          { wide: false, image: "Prague/IMG-20231227-WA0082.jpg", alt: "A Prague memory from December 27", caption: "A winter afternoon", tag: "December 27" },
-          { wide: true, image: "Prague/IMG-20231227-WA0187.jpg", alt: "A Prague memory from December 27", caption: "City lights and winter colors", tag: "December 27" },
-          { wide: false, image: "Prague/IMG-20231227-WA0196.jpg", alt: "A Prague memory from December 27", caption: "A moment in Prague", tag: "December 27" },
-          { wide: false, image: "Prague/IMG-20231227-WA0201.jpg", alt: "A Prague memory beside the river at dusk", caption: "Evening by the river", tag: "December 27" },
-          { wide: false, image: "Prague/IMG-20231227-WA0249.jpg", alt: "A Prague memory from December 27", caption: "A final look around", tag: "December 27" },
-          { wide: false, image: "Prague/IMG-20231227-WA0251.jpg", alt: "A Prague memory from December 27", caption: "One more city view", tag: "December 27" },
-          { wide: true, image: "Prague/IMG-20231227-WA0310.jpg", alt: "A Prague memory from December 27", caption: "Until the next journey", tag: "December 27" },
-          { wide: false, image: "assets/instagram/prague-march-2025-01.png", alt: "Kruparth standing beside a sports car in Prague", caption: "A Prague arrival moment", tag: "March 13, 2025" },
-          { wide: false, image: "assets/instagram/prague-march-2025-02.png", alt: "Prague Castle and illuminated city views after dark", caption: "Prague after dark", tag: "March 13, 2025" },
-          { wide: false, image: "assets/instagram/prague-march-2025-03.png", alt: "Kruparth in front of St. Vitus Cathedral in Prague", caption: "Looking up at history", tag: "March 13, 2025" },
-          { wide: false, image: "assets/instagram/prague-march-2025-04.png", alt: "The Dancing House in Prague", caption: "A modern landmark", tag: "March 13, 2025" },
-          { wide: false, image: "assets/instagram/prague-march-2025-05.png", alt: "Prague's Astronomical Clock in Old Town Square", caption: "Rainy day at the clock", tag: "March 13, 2025" },
-          { wide: false, image: "assets/instagram/prague-march-2025-06.png", alt: "A nightlife scene in Prague", caption: "Prague after hours", tag: "March 13, 2025" }
+          { wide: true, image: "Prague/IMG-20231226-WA0246.webp", alt: "A Prague memory from December 26", caption: "Prague, in the middle of winter", tag: "December 26" },
+          { wide: false, image: "Prague/IMG-20231226-WA0296.webp", alt: "A Prague memory from December 26", caption: "A day to remember", tag: "December 26" },
+          { wide: false, image: "Prague/IMG-20231226-WA0321.webp", alt: "A Prague memory from December 26", caption: "Another frame from the city", tag: "December 26" },
+          { wide: false, image: "Prague/IMG-20231227-WA0051.webp", alt: "A Prague memory from December 27", caption: "The next day in Prague", tag: "December 27" },
+          { wide: false, image: "Prague/IMG-20231227-WA0082.webp", alt: "A Prague memory from December 27", caption: "A winter afternoon", tag: "December 27" },
+          { wide: true, image: "Prague/IMG-20231227-WA0187.webp", alt: "A Prague memory from December 27", caption: "City lights and winter colors", tag: "December 27" },
+          { wide: false, image: "Prague/IMG-20231227-WA0196.webp", alt: "A Prague memory from December 27", caption: "A moment in Prague", tag: "December 27" },
+          { wide: false, image: "Prague/IMG-20231227-WA0201.webp", alt: "A Prague memory beside the river at dusk", caption: "Evening by the river", tag: "December 27" },
+          { wide: false, image: "Prague/IMG-20231227-WA0249.webp", alt: "A Prague memory from December 27", caption: "A final look around", tag: "December 27" },
+          { wide: false, image: "Prague/IMG-20231227-WA0251.webp", alt: "A Prague memory from December 27", caption: "One more city view", tag: "December 27" },
+          { wide: true, image: "Prague/IMG-20231227-WA0310.webp", alt: "A Prague memory from December 27", caption: "Until the next journey", tag: "December 27" },
+          { wide: false, image: "assets/instagram/prague-march-2025-01.webp", alt: "Kruparth standing beside a sports car in Prague", caption: "A Prague arrival moment", tag: "March 13, 2025" },
+          { wide: false, image: "assets/instagram/prague-march-2025-02.webp", alt: "Prague Castle and illuminated city views after dark", caption: "Prague after dark", tag: "March 13, 2025" },
+          { wide: false, image: "assets/instagram/prague-march-2025-03.webp", alt: "Kruparth in front of St. Vitus Cathedral in Prague", caption: "Looking up at history", tag: "March 13, 2025" },
+          { wide: false, image: "assets/instagram/prague-march-2025-04.webp", alt: "The Dancing House in Prague", caption: "A modern landmark", tag: "March 13, 2025" },
+          { wide: false, image: "assets/instagram/prague-march-2025-05.webp", alt: "Prague's Astronomical Clock in Old Town Square", caption: "Rainy day at the clock", tag: "March 13, 2025" },
+          { wide: false, image: "assets/instagram/prague-march-2025-06.webp", alt: "A nightlife scene in Prague", caption: "Prague after hours", tag: "March 13, 2025" }
         ]
       },
       {
@@ -1234,13 +1363,13 @@
         mapCheckpoint: "netherlands",
         story: "I spent August 11 to 14, 2024 exploring Amsterdam. I loved the colorful street art, the canals, and the windmills just outside the city.",
         photos: [
-          { wide: false, image: "assets/instagram/netherlands-amsterdam-01.png", alt: "Kruparth jumping in front of colorful street art in the Netherlands", caption: "A moment in Amsterdam", tag: "Street art" },
-          { wide: false, image: "assets/instagram/netherlands-amsterdam-02.png", alt: "Kruparth beside a painted wall in the Netherlands", caption: "Color on every corner", tag: "Street art" },
-          { wide: false, image: "assets/instagram/netherlands-amsterdam-03.png", alt: "A view labeled Amsterdam, Netherlands", caption: "Amsterdam, Netherlands", tag: "City view" },
-          { wide: false, image: "assets/instagram/netherlands-amsterdam-07.png", alt: "A modern waterfront building in Amsterdam", caption: "A view across the water", tag: "Waterfront" },
-          { wide: true, image: "assets/instagram/netherlands-amsterdam-04.png", alt: "Kruparth beside windmills in the Dutch countryside", caption: "Windmills beyond the city", tag: "Countryside" },
-          { wide: false, image: "assets/instagram/netherlands-amsterdam-05.png", alt: "Kruparth beside a canal in Amsterdam", caption: "Along the canals", tag: "Canals" },
-          { wide: false, image: "assets/instagram/netherlands-amsterdam-06.png", alt: "Kruparth posing beside colorful street art", caption: "Street art and movement", tag: "Street art" }
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-01.webp", alt: "Kruparth jumping in front of colorful street art in the Netherlands", caption: "A moment in Amsterdam", tag: "Street art" },
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-02.webp", alt: "Kruparth beside a painted wall in the Netherlands", caption: "Color on every corner", tag: "Street art" },
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-03.webp", alt: "A view labeled Amsterdam, Netherlands", caption: "Amsterdam, Netherlands", tag: "City view" },
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-07.webp", alt: "A modern waterfront building in Amsterdam", caption: "A view across the water", tag: "Waterfront" },
+          { wide: true, image: "assets/instagram/netherlands-amsterdam-04.webp", alt: "Kruparth beside windmills in the Dutch countryside", caption: "Windmills beyond the city", tag: "Countryside" },
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-05.webp", alt: "Kruparth beside a canal in Amsterdam", caption: "Along the canals", tag: "Canals" },
+          { wide: false, image: "assets/instagram/netherlands-amsterdam-06.webp", alt: "Kruparth posing beside colorful street art", caption: "Street art and movement", tag: "Street art" }
         ]
       },
       {
@@ -1254,21 +1383,21 @@
         mapCheckpoint: "france",
         story: "I spent December 9 to 12, 2025 in Paris, taking in the Louvre’s glass pyramid and seeing the Mona Lisa up close. It was a short trip filled with moments I had imagined for years.",
         photos: [
-          { wide: true, image: "assets/instagram/france-paris-01.jpg", alt: "A Paris memory from France", caption: "Paris in a frame", tag: "France" },
-          { wide: false, image: "assets/instagram/france-paris-02.jpg", alt: "A Paris memory from France", caption: "A moment in Paris", tag: "France" },
-          { wide: false, image: "assets/instagram/france-paris-03.jpg", alt: "A Paris memory from France", caption: "A city memory", tag: "France" },
-          { wide: false, image: "assets/instagram/france-paris-04.jpg", alt: "A Paris memory from France", caption: "A day to remember", tag: "France" },
-          { wide: false, image: "assets/instagram/france-paris-05.jpg", alt: "A Paris memory from France", caption: "Paris, saved in a photo", tag: "France" },
-          { wide: true, image: "assets/instagram/france-paris-06.jpg", alt: "A Paris memory from France", caption: "One more city moment", tag: "France" },
-          { wide: false, image: "assets/instagram/france-paris-2025-12-01.png", alt: "Kruparth beside the glass pyramid at the Louvre in Paris", caption: "A moment at the Louvre", tag: "December 9 to 12, 2025" },
-          { wide: false, image: "assets/instagram/france-paris-2025-12-02.png", alt: "The Mona Lisa on display at the Louvre in Paris", caption: "The Mona Lisa, up close", tag: "December 9 to 12, 2025" },
-          { wide: false, image: "assets/instagram/france-disney-01.jpg", alt: "A childhood-dream visit to Disneyland Paris", caption: "A childhood dream", tag: "France" },
-          { wide: false, image: "assets/instagram/france-disney-02.jpg", alt: "A childhood-dream visit to Disneyland Paris", caption: "A little magic", tag: "France" },
-          { wide: true, type: "video", image: "assets/instagram/france-paris-video-01.mp4", poster: "assets/instagram/france-paris-01.jpg", alt: "A Paris memory in motion", caption: "Paris in motion", tag: "France" },
-          { wide: false, type: "video", image: "assets/instagram/france-paris-video-02.mp4", poster: "assets/instagram/france-paris-02.jpg", alt: "A Paris memory in motion", caption: "A city moment in motion", tag: "France" },
-          { wide: true, type: "video", image: "assets/instagram/france-disney-video-01.mp4", poster: "assets/instagram/france-disney-01.jpg", alt: "A Disneyland Paris memory in motion", caption: "A dream day in motion", tag: "France" },
-          { wide: false, type: "video", image: "assets/instagram/france-disney-video-02.mp4", poster: "assets/instagram/france-disney-02.jpg", alt: "A Disneyland Paris memory in motion", caption: "A little magic in motion", tag: "France" },
-          { wide: true, type: "video", image: "assets/instagram/france-disney-video-03.mp4", poster: "assets/instagram/france-disney-01.jpg", alt: "A Disneyland Paris memory in motion", caption: "A childhood dream, remembered", tag: "France" }
+          { wide: true, image: "assets/instagram/france-paris-01.webp", alt: "A Paris memory from France", caption: "Paris in a frame", tag: "France" },
+          { wide: false, image: "assets/instagram/france-paris-02.webp", alt: "A Paris memory from France", caption: "A moment in Paris", tag: "France" },
+          { wide: false, image: "assets/instagram/france-paris-03.webp", alt: "A Paris memory from France", caption: "A city memory", tag: "France" },
+          { wide: false, image: "assets/instagram/france-paris-04.webp", alt: "A Paris memory from France", caption: "A day to remember", tag: "France" },
+          { wide: false, image: "assets/instagram/france-paris-05.webp", alt: "A Paris memory from France", caption: "Paris, saved in a photo", tag: "France" },
+          { wide: true, image: "assets/instagram/france-paris-06.webp", alt: "A Paris memory from France", caption: "One more city moment", tag: "France" },
+          { wide: false, image: "assets/instagram/france-paris-2025-12-01.webp", alt: "Kruparth beside the glass pyramid at the Louvre in Paris", caption: "A moment at the Louvre", tag: "December 9 to 12, 2025" },
+          { wide: false, image: "assets/instagram/france-paris-2025-12-02.webp", alt: "The Mona Lisa on display at the Louvre in Paris", caption: "The Mona Lisa, up close", tag: "December 9 to 12, 2025" },
+          { wide: false, image: "assets/instagram/france-disney-01.webp", alt: "A childhood-dream visit to Disneyland Paris", caption: "A childhood dream", tag: "France" },
+          { wide: false, image: "assets/instagram/france-disney-02.webp", alt: "A childhood-dream visit to Disneyland Paris", caption: "A little magic", tag: "France" },
+          { wide: true, type: "video", image: "assets/instagram/france-paris-video-01.mp4", poster: "assets/instagram/france-paris-01.webp", alt: "A Paris memory in motion", caption: "Paris in motion", tag: "France" },
+          { wide: false, type: "video", image: "assets/instagram/france-paris-video-02.mp4", poster: "assets/instagram/france-paris-02.webp", alt: "A Paris memory in motion", caption: "A city moment in motion", tag: "France" },
+          { wide: true, type: "video", image: "assets/instagram/france-disney-video-01.mp4", poster: "assets/instagram/france-disney-01.webp", alt: "A Disneyland Paris memory in motion", caption: "A dream day in motion", tag: "France" },
+          { wide: false, type: "video", image: "assets/instagram/france-disney-video-02.mp4", poster: "assets/instagram/france-disney-02.webp", alt: "A Disneyland Paris memory in motion", caption: "A little magic in motion", tag: "France" },
+          { wide: true, type: "video", image: "assets/instagram/france-disney-video-03.mp4", poster: "assets/instagram/france-disney-01.webp", alt: "A Disneyland Paris memory in motion", caption: "A childhood dream, remembered", tag: "France" }
         ]
       },
       {
@@ -1282,15 +1411,15 @@
         mapCheckpoint: "hungary",
         story: "I celebrated New Year in Budapest with my friends, welcoming 2025 together. From riverside views to days exploring the city, those moments made the trip one I’ll always remember.",
         photos: [
-          { wide: true, image: "assets/instagram/hungary-01.jpg", alt: "A Budapest memory from Hungary", caption: "Somewhere between the past and the present", tag: "Hungary" },
-          { wide: false, image: "assets/instagram/hungary-02.jpg", alt: "A Budapest memory from Hungary", caption: "A city moment", tag: "Hungary" },
-          { wide: false, image: "assets/instagram/hungary-03.jpg", alt: "A Budapest memory from Hungary", caption: "A day to remember", tag: "Hungary" },
-          { wide: true, image: "assets/instagram/hungary-04.jpg", alt: "A Budapest memory from Hungary", caption: "One more Budapest frame", tag: "Hungary" },
-          { wide: true, image: "assets/instagram/hungary-new-year-01.png", alt: "Kruparth celebrating New Year in Budapest with friends", caption: "New Year with my friends", tag: "New Year" },
-          { wide: false, image: "assets/instagram/hungary-new-year-02.png", alt: "Kruparth by the Danube in Budapest", caption: "A moment by the Danube", tag: "Budapest" },
-          { wide: false, image: "assets/instagram/hungary-new-year-03.png", alt: "Kruparth holding an RCB flag beside the Danube", caption: "A little team pride", tag: "RCB" },
-          { wide: false, image: "assets/instagram/hungary-new-year-04.png", alt: "Kruparth and a friend by the Danube in Budapest", caption: "Akka, my partner in crime", tag: "Friends" },
-          { wide: false, image: "assets/instagram/hungary-new-year-05.png", alt: "Kruparth with friends beside the Danube in Budapest", caption: "The best kind of company", tag: "Friends" }
+          { wide: true, image: "assets/instagram/hungary-01.webp", alt: "A Budapest memory from Hungary", caption: "Somewhere between the past and the present", tag: "Hungary" },
+          { wide: false, image: "assets/instagram/hungary-02.webp", alt: "A Budapest memory from Hungary", caption: "A city moment", tag: "Hungary" },
+          { wide: false, image: "assets/instagram/hungary-03.webp", alt: "A Budapest memory from Hungary", caption: "A day to remember", tag: "Hungary" },
+          { wide: true, image: "assets/instagram/hungary-04.webp", alt: "A Budapest memory from Hungary", caption: "One more Budapest frame", tag: "Hungary" },
+          { wide: true, image: "assets/instagram/hungary-new-year-01.webp", alt: "Kruparth celebrating New Year in Budapest with friends", caption: "New Year with my friends", tag: "New Year" },
+          { wide: false, image: "assets/instagram/hungary-new-year-02.webp", alt: "Kruparth by the Danube in Budapest", caption: "A moment by the Danube", tag: "Budapest" },
+          { wide: false, image: "assets/instagram/hungary-new-year-03.webp", alt: "Kruparth holding an RCB flag beside the Danube", caption: "A little team pride", tag: "RCB" },
+          { wide: false, image: "assets/instagram/hungary-new-year-04.webp", alt: "Kruparth and a friend by the Danube in Budapest", caption: "Akka, my partner in crime", tag: "Friends" },
+          { wide: false, image: "assets/instagram/hungary-new-year-05.webp", alt: "Kruparth with friends beside the Danube in Budapest", caption: "The best kind of company", tag: "Friends" }
         ]
       },
       {
@@ -1304,9 +1433,9 @@
         mapCheckpoint: "austria",
         story: "I spent March 10 to 12, 2025 in Austria, taking in Vienna’s grand Schönbrunn Palace and pausing for a taste of the city’s famous café culture. A few days, a lot to remember.",
         photos: [
-          { wide: false, image: "assets/instagram/austria-vienna-2025-01.png", alt: "A slice of Sachertorte at Café Sacher in Vienna", caption: "A sweet pause at Café Sacher", tag: "Vienna" },
-          { wide: false, image: "assets/instagram/austria-vienna-2025-02.png", alt: "Kruparth in the courtyard of Schönbrunn Palace in Vienna", caption: "A day at Schönbrunn", tag: "Vienna" },
-          { wide: false, image: "assets/instagram/austria-vienna-2025-03.png", alt: "The courtyard of Schönbrunn Palace in Vienna", caption: "Grandeur in every direction", tag: "Schönbrunn Palace" }
+          { wide: false, image: "assets/instagram/austria-vienna-2025-01.webp", alt: "A slice of Sachertorte at Café Sacher in Vienna", caption: "A sweet pause at Café Sacher", tag: "Vienna" },
+          { wide: false, image: "assets/instagram/austria-vienna-2025-02.webp", alt: "Kruparth in the courtyard of Schönbrunn Palace in Vienna", caption: "A day at Schönbrunn", tag: "Vienna" },
+          { wide: false, image: "assets/instagram/austria-vienna-2025-03.webp", alt: "The courtyard of Schönbrunn Palace in Vienna", caption: "Grandeur in every direction", tag: "Schönbrunn Palace" }
         ]
       },
       {
@@ -1320,12 +1449,12 @@
         mapCheckpoint: "switzerland",
         story: "I first saw the Rhine Falls on May 31, 2025, then returned for a day in Zurich on August 14, 2026. From the roar of the falls to city streets and a stop at the Lindt Home of Chocolate near Zurich, each visit gave me a different Swiss memory.",
         photos: [
-          { wide: true, image: "assets/instagram/switzerland-01.jpg", alt: "A lakeside memory from Switzerland", caption: "Mentally, I’m still here", tag: "Switzerland" },
-          { wide: false, image: "assets/instagram/switzerland-rheinfall-2025-01.png", alt: "Kruparth by the Rhine Falls at Rheinfall, Switzerland", caption: "A moment at Rheinfall", tag: "May 31, 2025" },
-          { wide: false, image: "assets/instagram/switzerland-rheinfall-2025-02.png", alt: "The Rhine Falls in full flow", caption: "The falls in all their power", tag: "May 31, 2025" },
-          { wide: false, image: "assets/instagram/switzerland-zurich-2026-01.png", alt: "Kruparth at the Lindt Home of Chocolate near Zurich", caption: "A sweet stop near Zurich", tag: "August 14, 2026" },
-          { wide: false, image: "assets/instagram/switzerland-zurich-2026-02.png", alt: "A tree-lined Zurich street with Swiss flags", caption: "A walk through Zurich", tag: "August 14, 2026" },
-          { wide: false, image: "assets/instagram/switzerland-zurich-2026-03.png", alt: "Kruparth on a Zurich street", caption: "A Zurich afternoon", tag: "August 14, 2026" }
+          { wide: true, image: "assets/instagram/switzerland-01.webp", alt: "A lakeside memory from Switzerland", caption: "Mentally, I’m still here", tag: "Switzerland" },
+          { wide: false, image: "assets/instagram/switzerland-rheinfall-2025-01.webp", alt: "Kruparth by the Rhine Falls at Rheinfall, Switzerland", caption: "A moment at Rheinfall", tag: "May 31, 2025" },
+          { wide: false, image: "assets/instagram/switzerland-rheinfall-2025-02.webp", alt: "The Rhine Falls in full flow", caption: "The falls in all their power", tag: "May 31, 2025" },
+          { wide: false, image: "assets/instagram/switzerland-zurich-2026-01.webp", alt: "Kruparth at the Lindt Home of Chocolate near Zurich", caption: "A sweet stop near Zurich", tag: "August 14, 2026" },
+          { wide: false, image: "assets/instagram/switzerland-zurich-2026-02.webp", alt: "A tree-lined Zurich street with Swiss flags", caption: "A walk through Zurich", tag: "August 14, 2026" },
+          { wide: false, image: "assets/instagram/switzerland-zurich-2026-03.webp", alt: "Kruparth on a Zurich street", caption: "A Zurich afternoon", tag: "August 14, 2026" }
         ]
       }
     ];
@@ -1337,43 +1466,43 @@
 
     const STORIES = [
       { title: "The flight", icon: "✈️", bg: "#c85a32", slides: [
-        { cap: "On November 5, 2023, I flew from Bengaluru to Frankfurt.", image: "Chemnitz%20germany%20/1.jpg", alt: "A selfie aboard the flight" }
+        { cap: "On November 5, 2023, I flew from Bengaluru to Frankfurt.", image: "Chemnitz%20germany%20/1.webp", alt: "A selfie aboard the flight" }
       ]},
       { title: "Germany", icon: "🇩🇪", bg: "#2b5876", slides: [
-        { cap: "First streets in Chemnitz, November 6.", image: "Chemnitz%20germany%20/IMG20231106113201.jpg", alt: "A tram street in Chemnitz" },
-        { cap: "Golden autumn days in Germany.", image: "Chemnitz%20germany%20/5.jpg", alt: "A portrait among golden autumn leaves" }
+        { cap: "First streets in Chemnitz, November 6.", image: "Chemnitz%20germany%20/IMG20231106113201.webp", alt: "A tram street in Chemnitz" },
+        { cap: "Golden autumn days in Germany.", image: "Chemnitz%20germany%20/5.webp", alt: "A portrait among golden autumn leaves" }
       ]},
       { title: "Czechia", icon: "🇨🇿", bg: "#355c7d", slides: [
-        { cap: "My first Prague visit was December 26 to 29, 2023.", image: "Prague/IMG-20231227-WA0201.jpg", alt: "A Prague memory beside the river at dusk" },
-        { cap: "Back in Prague on March 13, 2025.", image: "assets/instagram/prague-march-2025-04.png", alt: "The Dancing House in Prague" }
+        { cap: "My first Prague visit was December 26 to 29, 2023.", image: "Prague/IMG-20231227-WA0201.webp", alt: "A Prague memory beside the river at dusk" },
+        { cap: "Back in Prague on March 13, 2025.", image: "assets/instagram/prague-march-2025-04.webp", alt: "The Dancing House in Prague" }
       ]},
       { title: "Netherlands", icon: "🇳🇱", bg: "#537b92", slides: [
-        { cap: "Amsterdam, August 11 to 14, 2024.", image: "assets/instagram/netherlands-amsterdam-03.png", alt: "A view labeled Amsterdam, Netherlands" },
-        { cap: "A modern waterfront building in Amsterdam.", image: "assets/instagram/netherlands-amsterdam-07.png", alt: "A modern waterfront building in Amsterdam" },
-        { cap: "Windmills beyond the city.", image: "assets/instagram/netherlands-amsterdam-04.png", alt: "Windmills in the Netherlands" }
+        { cap: "Amsterdam, August 11 to 14, 2024.", image: "assets/instagram/netherlands-amsterdam-03.webp", alt: "A view labeled Amsterdam, Netherlands" },
+        { cap: "A modern waterfront building in Amsterdam.", image: "assets/instagram/netherlands-amsterdam-07.webp", alt: "A modern waterfront building in Amsterdam" },
+        { cap: "Windmills beyond the city.", image: "assets/instagram/netherlands-amsterdam-04.webp", alt: "Windmills in the Netherlands" }
       ]},
       { title: "Hungary", icon: "🇭🇺", bg: "#8b4e56", slides: [
-        { cap: "New Year in Budapest with my friends, December 31, 2024 to January 3, 2025.", image: "assets/instagram/hungary-new-year-01.png", alt: "Kruparth celebrating New Year in Budapest with friends" },
-        { cap: "A moment by the Danube.", image: "assets/instagram/hungary-new-year-02.png", alt: "Kruparth by the Danube in Budapest" },
-        { cap: "The best memories are made together.", image: "assets/instagram/hungary-new-year-05.png", alt: "Kruparth with friends beside the Danube in Budapest" }
+        { cap: "New Year in Budapest with my friends, December 31, 2024 to January 3, 2025.", image: "assets/instagram/hungary-new-year-01.webp", alt: "Kruparth celebrating New Year in Budapest with friends" },
+        { cap: "A moment by the Danube.", image: "assets/instagram/hungary-new-year-02.webp", alt: "Kruparth by the Danube in Budapest" },
+        { cap: "The best memories are made together.", image: "assets/instagram/hungary-new-year-05.webp", alt: "Kruparth with friends beside the Danube in Budapest" }
       ]},
       { title: "Austria", icon: "🇦🇹", bg: "#c65b4d", slides: [
-        { cap: "Vienna, March 10 to 12, 2025.", image: "assets/instagram/austria-vienna-2025-01.png", alt: "A slice of Sachertorte at Café Sacher in Vienna" },
-        { cap: "A day at Schönbrunn Palace.", image: "assets/instagram/austria-vienna-2025-02.png", alt: "Kruparth in the courtyard of Schönbrunn Palace in Vienna" },
-        { cap: "Grandeur in every direction.", image: "assets/instagram/austria-vienna-2025-03.png", alt: "The courtyard of Schönbrunn Palace in Vienna" }
+        { cap: "Vienna, March 10 to 12, 2025.", image: "assets/instagram/austria-vienna-2025-01.webp", alt: "A slice of Sachertorte at Café Sacher in Vienna" },
+        { cap: "A day at Schönbrunn Palace.", image: "assets/instagram/austria-vienna-2025-02.webp", alt: "Kruparth in the courtyard of Schönbrunn Palace in Vienna" },
+        { cap: "Grandeur in every direction.", image: "assets/instagram/austria-vienna-2025-03.webp", alt: "The courtyard of Schönbrunn Palace in Vienna" }
       ]},
       { title: "Switzerland", icon: "🇨🇭", bg: "#b94137", slides: [
-        { cap: "Rheinfall, May 31, 2025.", image: "assets/instagram/switzerland-rheinfall-2025-01.png", alt: "Kruparth by the Rhine Falls at Rheinfall, Switzerland" },
-        { cap: "The Rhine Falls in full flow.", image: "assets/instagram/switzerland-rheinfall-2025-02.png", alt: "The Rhine Falls in full flow" },
-        { cap: "Zurich, August 14, 2026.", image: "assets/instagram/switzerland-zurich-2026-02.png", alt: "A tree-lined Zurich street with Swiss flags" },
-        { cap: "A sweet stop near Zurich.", image: "assets/instagram/switzerland-zurich-2026-01.png", alt: "Kruparth at the Lindt Home of Chocolate near Zurich" },
-        { cap: "A Zurich afternoon.", image: "assets/instagram/switzerland-zurich-2026-03.png", alt: "Kruparth on a Zurich street" }
+        { cap: "Rheinfall, May 31, 2025.", image: "assets/instagram/switzerland-rheinfall-2025-01.webp", alt: "Kruparth by the Rhine Falls at Rheinfall, Switzerland" },
+        { cap: "The Rhine Falls in full flow.", image: "assets/instagram/switzerland-rheinfall-2025-02.webp", alt: "The Rhine Falls in full flow" },
+        { cap: "Zurich, August 14, 2026.", image: "assets/instagram/switzerland-zurich-2026-02.webp", alt: "A tree-lined Zurich street with Swiss flags" },
+        { cap: "A sweet stop near Zurich.", image: "assets/instagram/switzerland-zurich-2026-01.webp", alt: "Kruparth at the Lindt Home of Chocolate near Zurich" },
+        { cap: "A Zurich afternoon.", image: "assets/instagram/switzerland-zurich-2026-03.webp", alt: "Kruparth on a Zurich street" }
       ]},
       { title: "France", icon: "🇫🇷", bg: "#355c7d", slides: [
-        { cap: "Paris, December 9 to 12, 2025.", image: "assets/instagram/france-paris-2025-12-01.png", alt: "Kruparth beside the glass pyramid at the Louvre in Paris" },
-        { cap: "A moment with the Mona Lisa at the Louvre.", image: "assets/instagram/france-paris-2025-12-02.png", alt: "The Mona Lisa on display at the Louvre in Paris" },
-        { cap: "A moment from France.", image: "assets/instagram/france-paris-01.jpg", alt: "A Paris memory from France" },
-        { cap: "A childhood dream at Disneyland Paris.", image: "assets/instagram/france-disney-01.jpg", alt: "A childhood-dream visit to Disneyland Paris" }
+        { cap: "Paris, December 9 to 12, 2025.", image: "assets/instagram/france-paris-2025-12-01.webp", alt: "Kruparth beside the glass pyramid at the Louvre in Paris" },
+        { cap: "A moment with the Mona Lisa at the Louvre.", image: "assets/instagram/france-paris-2025-12-02.webp", alt: "The Mona Lisa on display at the Louvre in Paris" },
+        { cap: "A moment from France.", image: "assets/instagram/france-paris-01.webp", alt: "A Paris memory from France" },
+        { cap: "A childhood dream at Disneyland Paris.", image: "assets/instagram/france-disney-01.webp", alt: "A childhood-dream visit to Disneyland Paris" }
       ]}
     ];
 
@@ -1469,6 +1598,8 @@
     const journeyMap = document.getElementById("journeyMap");
     const checkpointList = document.getElementById("checkpointList");
     checkpointList.style.setProperty("--checkpoint-count", CHECKPOINTS.length);
+    document.getElementById("mapStopCount").textContent =
+      `${String(CHECKPOINTS.length).padStart(2, "0")} DESTINATIONS`;
     CHECKPOINTS.forEach((checkpoint, index) => {
       const button = document.createElement("button");
       button.className = "map-checkpoint";
